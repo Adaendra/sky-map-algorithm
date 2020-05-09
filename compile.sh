@@ -11,7 +11,7 @@ command -v uglifyjs >/dev/null 2>&1 || { echo >&2 "UglifyJs is not installed"; e
 tsc ./classes/*.ts --out ./sky-map-algorithm.js
 
 
-## Minify the script with uglifyjs, we get a candybox3.min.js.temp script
+## Minify the script with uglifyjs, we get a sky-map-algorithm.min.js script
 
 uglifyjs sky-map-algorithm.js -c -m -o sky-map-algorithm.min.js
 
