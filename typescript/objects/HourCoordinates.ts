@@ -1,6 +1,6 @@
 import {EquatorialCoordinates} from "./EquatorialCoordinates";
 import {HorizontalCoordinates} from "./HorizontalCoordinates";
-import {Utils} from "../algorithms/Utils";
+import {Utils} from "../formulas/Utils";
 
 export class HourCoordinates {
     // ATTRIBUTES

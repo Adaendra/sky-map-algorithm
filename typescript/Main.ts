@@ -1,8 +1,8 @@
-import {GregorianDateTime} from "./algorithms/GregorianDateTime";
+import {GregorianDateTime} from "./formulas/GregorianDateTime";
 import {DMSCoordinates} from "./objects/DMSCoordinates";
-import {Utils} from "./algorithms/Utils";
+import {Utils} from "./formulas/Utils";
 import {EquatorialCoordinates} from "./objects/EquatorialCoordinates";
-import {SiderealTime} from "./algorithms/SiderealTime";
+import {SiderealTime} from "./formulas/SiderealTime";
 
 export module Main {
 

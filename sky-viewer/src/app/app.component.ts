@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Main} from "../../../classes/Main";
+import {Main} from "../../../typescript/Main";
 
 @Component({
   selector: 'app-root',

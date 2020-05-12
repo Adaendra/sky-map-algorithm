@@ -6,6 +6,7 @@ export class Utils {
     /**
      * If _angle is not between 0 and 360°, add or substract 360 util value is include between.
      * @param _angle: number.
+     * @return number - Converted angle.
      */
     public static revolution(_angle) {
         if (_angle < 0) {
@@ -22,6 +23,12 @@ export class Utils {
     }
 
     // ----- Time <-> Decimal -----
+    /**
+     * Convert time to decimal hour.
+     * @param _h : number - Hours.
+     * @param _m : number - Minutes.
+     * @param _s : number - Seconds.
+     */
     public static convertTimeToDecimal(_h, _m, _s) {
         return _h + _m / 60 + _s / 3600;
     }
