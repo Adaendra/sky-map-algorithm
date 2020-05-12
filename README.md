@@ -10,5 +10,14 @@ There is a lot of projects who use these algorithms but no-one have a simple lib
 A website will be added to use this algorithm and see results.
 
 --------
+## How to use it
+In this project you will find some folders named with a langage name which contains algorithms and formulas inside.
+Just pick the langage you need and copy-paste in your project.
+
+Current languages available :
+* JavaScript
+* TypeScript
+
+--------
 ## How to participate
 Open an issue to explain what you want to add/or modify, then open a Pull Request with your code.
