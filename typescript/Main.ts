@@ -5,6 +5,7 @@ import {Algorithm} from "./Algorithm";
 
 export module Main {
 
+    // TODO : Modifier cette méthode pour qu'elle aie lire la liste des étoiles et calcule leur position pour chacune d'entre elles.
     export function hello() {
         var dateTime: GregorianDateTime = new GregorianDateTime(
             1987, 4, 10,
