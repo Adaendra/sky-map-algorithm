@@ -237,7 +237,9 @@ function define_angleHoraire(_localSiderealTime, _rightAscension) {
 }
 
 function define_angleHoraire(_greenwichSiderealTime, _observerLongitude, _rightAscension) {
-    //
+    console.log(_greenwichSiderealTime);
+    console.log(_observerLongitude);
+    console.log(_greenwichSiderealTime + _observerLongitude);
     return _greenwichSiderealTime + _observerLongitude - _rightAscension;
 }
 
@@ -277,6 +279,13 @@ function convert_coordonneesHoraires_to_coordonneesEquatoriales(_declinaison, _t
 
 // ----- Coordonnées Équatoriales <-> Coordonnées Horizontales -----
 function convert_coordonneesEquatoriales_to_coordoonneesHorizontales(_observerLatitude, _declination, _angleHoraire) {
+    console.log(' ');
+    console.log('>>>> CONVERT ::');
+    console.log(' ');
+    console.log('- _observerLatitude :: ' + _observerLatitude);
+    console.log('- _declination :: ' + _declination);
+    console.log('- _angleHoraire :: ' + _angleHoraire);
+    console.log(' ');
     // Formule 13.5 du livre p 93
     var A_ = Math.atan(
         Math.sin(_angleHoraire) /
@@ -356,10 +365,15 @@ console.log('>> Longitude observateur :: ' + test_longitudeObservateur
     + " => " + convertDegreesToDecimalHour(test_longitudeObservateur));
 
 console.log('>> Ascension Droite :: ' + test_ascensionDroite);
+console.log('>> Declinaison :: ' + test_declinaison);
 
 console.log(' ');
 console.log('>> angle horaire :: ' + test_angleHoraire + " >> " + convertDecimalHourToDegrees(test_angleHoraire)
     + " => " + _360deg(convertDecimalHourToDegrees(test_angleHoraire)));
+console.log(' ');
+console.log('-------------------');
+console.log(' ');
+console.log('> lat :: ' + test_latitudeObservateur * Math.PI / 180);
 convert_coordonneesEquatoriales_to_coordoonneesHorizontales(
     test_latitudeObservateur * Math.PI / 180,
     test_declinaison * Math.PI / 180,
