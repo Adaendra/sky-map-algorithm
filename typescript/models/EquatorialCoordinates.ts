@@ -13,9 +13,10 @@ export class EquatorialCoordinates {
 
     // PUBLIC METHODS
     public convert_to_hourCoordinates(_observerTimeSidereal) {
-        var hourAngle = _observerTimeSidereal - this.rightAscension;
-
-        return new HourCoordinates(hourAngle, this.declination);
+        return new HourCoordinates(
+            (_observerTimeSidereal - this.rightAscension),
+            this.declination
+        );
     }
 
 }

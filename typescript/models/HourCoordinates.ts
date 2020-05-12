@@ -15,22 +15,17 @@ export class HourCoordinates {
 
     // PUBLIC METHODS
     public convert_to_equatorialCoordinates(_observerTimeSidereal) {
-        var rightAscension = _observerTimeSidereal - this.hourAngle;
-
-        return new EquatorialCoordinates(rightAscension, this.declination);
+        return new EquatorialCoordinates(
+            (_observerTimeSidereal - this.hourAngle),
+            this.declination
+        );
     }
 
     public convert_to_horizontalCoordinates(_observerLatitude) {
         _observerLatitude = _observerLatitude * Math.PI / 180;
         var declinaisonRad = this.declination * Math.PI / 180;
         var hourAngleRad = Utils.revolution(Utils.convertDecimalHourToDegrees(this.hourAngle)) * Math.PI / 180;
-        console.log(' ');
-        console.log('>>>> CONVERT ::');
-        console.log(' ');
-        console.log('- _observerLatitude :: ' + _observerLatitude);
-        console.log('- _declination :: ' + declinaisonRad);
-        console.log('- _angleHoraire :: ' + hourAngleRad);
-        console.log(' ');
+
 
         // Formula 13.5 -> p.93
         var azimuth = Math.atan(
