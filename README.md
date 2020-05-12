@@ -5,13 +5,14 @@ Algorithm implementation to locate stars in the sky.
 ## Objectives
 The goal is to implement an algorithm to locate stars in the sky for a date-time and a location. *(ex : lat: 35.689487, long: 139.691711, 01-01-2020 00:00)*
 
-There is a lot of projects who use these algorithms but no-one have a simple librairy to reuse it.
-
 A website will be added to use this algorithm and see results.
+
+With this algorithm, a lot of methods which use an astronomical formula are available in.
 
 --------
 ## How to use it
 In this project you will find some folders named with a langage name which contains algorithms and formulas inside.
+
 Just pick the langage you need and copy-paste it in your project.
 
 Current languages available :
