@@ -1,24 +1,20 @@
-console.log('-----------------------------');
-console.log('----- Sky Map Algorithm -----');
-console.log('-----------------------------');
-console.log(' ');
-
-
-// ----- Jour Grégorien -> Jour Julien ----- //
-// -- Chapitre 7 -> Pages 60-61
-function define_year(_annee, _mois) {
-    if (_mois === 1 || _mois === 2) {
-        return _annee - 1;
+// --------------------------------------- //
+// ----- Gregorian Day -> Julian Day ----- //
+// --------------------------------------- //
+// -- Chapitre 7 -> p.60-61
+function define_year(_year, _month) {
+    if (_month === 1 || _month === 2) {
+        return _year - 1;
     } else {
-        return _annee;
+        return _year;
     }
 }
 
-function define_month(_mois) {
-    if (_mois === 1 || _mois === 2) {
-        return _mois + 12;
+function define_month(_month) {
+    if (_month === 1 || _month === 2) {
+        return _month + 12;
     } else {
-        return _mois;
+        return _month;
     }
 }
 
@@ -34,76 +30,26 @@ function define_B(_A, isGregorianCalendar) {
     }
 }
 
-function define_JulianDay(_year, _month, _B, _decimalDay) {
-    return (Math.floor(365.25 * (_year + 4716)) + Math.floor(30.6001 * (_month + 1)) + _decimalDay + _B - 1524.5);
+function define_decimalDay(_day, _hours, _minutes, _seconds) {
+    var minutes_decimal = _minutes + (_seconds / 60);
+    var hours_decimal = _hours + (minutes_decimal / 60);
+    return _day + (hours_decimal / 24);
 }
 
-function define_decimalDay(_jour, _heures, _minutes, _secondes) {
-    var minutes_decimal = _minutes + (_secondes / 60);
-    var heures_decimal = _heures + (minutes_decimal / 60);
-    return _jour + (heures_decimal / 24);
+function define_JulianDay(_year, _month, _day, _hour, _minute, _second, _isGregorianCalendar) {
+    var year = define_year(_year, _month);
+    var month = define_month(_month);
+    var decimalDay = define_decimalDay(_day, _hour, _minute, _second);
+    var A = define_A(year);
+    var B = define_B(A, _isGregorianCalendar);
+
+    return (Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + decimalDay + B - 1524.5);
 }
 
 
-var t_year = define_year(1987, 4);
-var t_month = define_month(4);
-var t_day = define_decimalDay(10, 19, 21,0);
-var t_A = define_A(t_year);
-var t_B = define_B(t_A, true);
-var t_JD = define_JulianDay(t_year, t_month, t_B, t_day);
-
-console.log('--------------------');
-console.log(' ');
-console.log('Year :: ' + t_year);
-console.log('Month :: ' + t_month);
-console.log('Day :: ' + t_day);
-console.log('A :: ' + t_A);
-console.log('B :: ' + t_B);
-console.log('JD :: ' + t_JD);
-console.log(' ');
-console.log('--------------------');
-
-
-// ----- Jour Julien -> Jour Grégorien ----- //
-// var J = jourJulien + 0.5;
-// var Z = Math.floor(J);
-// var F = J - Math.floor(J);
-//
-// var A = define_A(Z);
-// var B = A + 1524;
-// var C = Math.floor((B - 122.1) / 365.25);
-// var D = Math.floor(365.25 * C);
-// var E = Math.floor((B - D) / 30.6001);
-//
-//
-// var jourG_decimal = B - D - Math.floor(30.6001 * E) + F;
-// var jourG = Math.floor(jourG_decimal);
-// var moisG = E < 13.5 ? (E - 1) : (E - 13);
-// var anneeG = moisG > 2.5 ? (C - 4716) : (C - 4715);
-//
-// var heuresG_decimal = (jourG_decimal - jourG) * 24;
-// var heuresG = Math.floor(heuresG_decimal);
-//
-// var minutesG_decimal = (heuresG_decimal - heuresG) * 60;
-// var minutesG = Math.floor(minutesG_decimal);
-//
-// var secondesG = Math.floor((minutesG_decimal - minutesG) * 60);
-//
-// console.log(anneeG + "-" + moisG + "-" + jourG + " " + heuresG + ":" + minutesG + ":" + secondesG);
-//
-// function define_A(_Z) {
-//     if (_Z < 2299161) {
-//         return _Z;
-//     } else {
-//         var a = Math.floor((_Z - 1867216.25) / 36534.25);
-//         return _Z + 1 + a - Math.floor(a / 4);
-//     }
-// }
-
-
-// ----- Temps sidéral de Greenwich ----- //
-// TODO : Chapitre 12 - 95
-
+// ----------------------------------- //
+// ----- Greenwich Sidereal Time ----- //
+// ----------------------------------- //
 /**
  * Formula 12.1 p87
  * Only valid for 0h UT.
@@ -150,23 +96,15 @@ function define_apparentSiderealTime_Greenwich(_JD, _T) {
         - _T * _T * _T / 38710000;
 }
 
-// var t_T = define_T(t_JD);
-// var t_G0 = define_siderealTime_Greenwich_0(t_T);
-// var t_G = define_meanSiderealTime_Greenwich(t_G0, convertTimeToDecimal(19, 21, 0));
-//
-// console.log('T : ' + t_T);
-// console.log('time sidereal Greenwich 0h : ' + t_G0);
-// console.log('time sidereal Greenwich : ' + t_G);
-// console.log(' --> ' + _360deg(t_G));
-// console.log(' ----> ' + convertDegreesToDecimalHour(_360deg(t_G)));
-//
-//
-// var _12_4 = define_apparentSiderealTime_Greenwich(t_JD, t_T);
-// console.log('12.4 :: ' + _12_4);
-// console.log(' --> ' + _360deg(_12_4));
-// console.log(' ----> ' + convertDegreesToDecimalHour(_360deg(_12_4)));
-
-function _360deg(_angle) {
+// ----------------- //
+// ----- UTILS ----- //
+// ----------------- //
+/**
+ * If _angle is not between 0 and 360°, add or substract 360 util value is include between.
+ * @param _angle: number.
+ * @return number - Converted angle.
+ */
+function revolution(_angle) {
     if (_angle < 0) {
         _angle = _angle + 360;
     } else if (_angle >= 360) {
@@ -174,7 +112,7 @@ function _360deg(_angle) {
     }
 
     if (_angle < 0 || _angle >= 360) {
-        return _360deg(_angle);
+        return revolution(_angle);
     } else {
         return _angle;
     }
@@ -186,9 +124,6 @@ function convertTimeToDecimal(_h, _m, _s) {
     return _h + _m / 60 + _s / 3600;
 }
 
-// TODO : Fonction conversion objet temps à décimal
-// TODO : Fonction conversion decimal à temps (et retourner un objet temps)
-
 // ----- DMS <-> Radians
 function convertDMSToDegrees(_d, _m, _s) {
     if (_d < 0) {
@@ -198,8 +133,8 @@ function convertDMSToDegrees(_d, _m, _s) {
     }
 }
 
-function convertDegreesToDMS(_r) {
-    var d_decimal = _r;
+function convertDegreesToDMS(_coordinateDegrees) {
+    var d_decimal = _coordinateDegrees;
     var d = Math.floor(d_decimal);
 
     var m_decimal = (d_decimal - d) * 60;
@@ -207,43 +142,35 @@ function convertDegreesToDMS(_r) {
 
     var s = (m_decimal - m) * 60;
 
-    console.log(_r + "° :: " + d + "° " + m + "' " + s + "\"");
-    // TODO : return value
+    return {d : d, m : m, s : s};
 }
 
 // ----- Degrees <-> Decimal Hour -----
 function convertDegreesToDecimalHour(_d) {
-    return _d / 15;// on divise par 15 car 1h = 15 degrés
+    return _d / 15; // We devide by 15 because 1h = 15°
 }
 
 function convertDecimalHourToDegrees(_d) {
-    return _d * 15; // on multiplie par 15 car 1h = 15 degrés
+    return _d * 15; // We multiply by 15 because 1h = 15°
 }
 
-// console.log(' ');
-// console.log('----- DMS <-> Degrees -----');
-// convertDegreesToDMS(6.15);
-// var deg = convertDMSToDegrees(6,9,0);
-// console.log(convertDegreesToDecimalHour(deg));
-// console.log(convertDecimalHourToDegrees(0.41000000000000003));
-// console.log(convertTimeToDecimal(0,24,36));
-// define_heureSiderale(jj, 17, 7, 24, convertDMSToDegrees(6,9,0));
 
+// ----------------------- //
+// ----- COORDINATES ----- //
+// ----------------------- //
 
-// ------------------------------------------------------------------------ //
-// ----- Angle horaire -----
-function define_angleHoraire(_localSiderealTime, _rightAscension) {
+// ----- Hour angle ----- //
+function define_hourAngle(_localSiderealTime, _rightAscension) {
     return _localSiderealTime - _rightAscension;
 }
 
-function define_angleHoraire(_greenwichSiderealTime, _observerLongitude, _rightAscension) {
-    console.log(_greenwichSiderealTime);
-    console.log(_observerLongitude);
-    console.log(_greenwichSiderealTime + _observerLongitude);
+function define_hourAngle(_greenwichSiderealTime, _observerLongitude, _rightAscension) {
     return _greenwichSiderealTime + _observerLongitude - _rightAscension;
 }
 
-// ----- Right Ascension -----
+
+// ----- Right Ascension ----- //
+
 function define_rightAscension(_localSiderealTime, _hourAngle) {
     return _localSiderealTime - _hourAngle;
 }
@@ -253,130 +180,86 @@ function define_rightAscension(_greenwichSiderealTime, _observerLongitude, _hour
 }
 
 
-// ----- Coordonnées Équatoriales <-> Coordonnées Horaires -----
-// TODO : Faire des objets par type de coordonnées
+// ----- Equatorial Coordinates <-> Hour Coordinates ----- //
 
-function convert_coordonneesEquatoriales_to_coordonneesHoraires(_declinaison, _tempsSideralObservateur, _ascensionDroite) {
-    var declinaison = _declinaison;
-    var angleHoraire = _tempsSideralObservateur - _ascensionDroite;
-
-    console.log('----- Coordonnées horaires -----');
-    console.log('- déclinaison : ' + declinaison);
-    console.log('- angle horaire : ' + angleHoraire);
-    // TODO  return
+function convert_equatorialCoordinates_to_hourCoordinates(_declination, _observerSiderealTime, _rightAscension) {
+    return {
+        declination : _declination,
+        hourAngle : define_hourAngle(_observerSiderealTime, _rightAscension)
+    }
 }
 
-function convert_coordonneesHoraires_to_coordonneesEquatoriales(_declinaison, _tempsSideralObservateur, _angleHoraire) {
-    var declinaison = _declinaison;
-    var ascensionDroite = _tempsSideralObservateur - _angleHoraire;
-
-
-    console.log('----- Coordonnées équatoriales -----');
-    console.log('- déclinaison : ' + declinaison);
-    console.log('- ascension droite : ' + ascensionDroite);
-    // TODO  return
+function convert_hourCoordinates_to_equatorialCoordinates(_declination, _observerSiderealTime, _hourAngle) {
+    return {
+        declination: _declination,
+        rightAscension: define_rightAscension(_observerSiderealTime, _hourAngle)
+    }
 }
 
-// ----- Coordonnées Équatoriales <-> Coordonnées Horizontales -----
-function convert_coordonneesEquatoriales_to_coordoonneesHorizontales(_observerLatitude, _declination, _angleHoraire) {
-    console.log(' ');
-    console.log('>>>> CONVERT ::');
-    console.log(' ');
-    console.log('- _observerLatitude :: ' + _observerLatitude);
-    console.log('- _declination :: ' + _declination);
-    console.log('- _angleHoraire :: ' + _angleHoraire);
-    console.log(' ');
-    // Formule 13.5 du livre p 93
-    var A_ = Math.atan(
-        Math.sin(_angleHoraire) /
-        ((Math.cos(_angleHoraire) * Math.sin(_observerLatitude)) - (Math.tan(_declination) * Math.cos(_observerLatitude)))
+// ----- Equatorial coordinates <-> Horizontal coordinates ----- //
+function convert_equatorialCoordinates_to_horizontalCoordinates(_observerLatitude, _declination, _hourAngle) {
+    // Formula 13.5 -> p 93
+    var azimuth = Math.atan(
+        Math.sin(_hourAngle) /
+        ((Math.cos(_hourAngle) * Math.sin(_observerLatitude)) - (Math.tan(_declination) * Math.cos(_observerLatitude)))
+    );
+    // azimuth is in radian
+
+    // Formula 13.6 -> p 93
+    var altitude = Math.asin(
+        (Math.sin(_observerLatitude) * Math.sin(_declination)) + (Math.cos(_observerLatitude) * Math.cos(_declination) * Math.cos(_hourAngle))
+    );
+    // altitude is in radian
+
+    return {
+        azimuth: (azimuth / Math.PI * 180),
+        altitude: (altitude / Math.PI * 180)
+    }; // altitude and azimuth are returned in degrees.
+}
+
+
+// --------------------- //
+// ----- ALGORITHM ----- //
+// --------------------- //
+/**
+ * Algorithm to calculate a celestial object's location for an observer at a moment.
+ * @param year : number
+ * @param month : number
+ * @param day : number
+ * @param hour : number
+ * @param minutes : number
+ * @param seconds : number
+ * @param observer_latitude : number - Latitude in degrees. ex: 46.204391
+ * @param observer_longitude : number - Longitude in degrees. ex: 6.143158
+ * @param celestialObject_declination : number - Declination in degrees. ex: 6.143158
+ * @param celestialObject_rightAscension : number - Right ascension in decimal. ex: 4.28
+ * @return {{altitude: number, azimuth: number}} - Horizontal coordinate of celestial object.
+ */
+function starLocationAlgorithm(year, month, day, hour, minutes, seconds,
+                               observer_latitude, observer_longitude,
+                               celestialObject_declination, celestialObject_rightAscension) {
+    var julianDay = define_JulianDay(year, month, day, hour, minutes, seconds, true);
+    var apparentGreenwichSiderealTime = revolution(
+        define_apparentSiderealTime_Greenwich(julianDay, define_T(julianDay))
     );
 
-    // Formule 13.6 du livre p 93
-    var h_ = Math.asin(
-        (Math.sin(_observerLatitude) * Math.sin(_declination)) + (Math.cos(_observerLatitude) * Math.cos(_declination) * Math.cos(_angleHoraire))
+    var hourAngle = define_hourAngle(
+        convertDegreesToDecimalHour(apparentGreenwichSiderealTime),
+        convertDegreesToDecimalHour(observer_longitude),
+        celestialObject_rightAscension
     );
 
-    console.log(' ');
-    console.log('--  LIVRE  --');
-    console.log(' ');
-    console.log('> A : ' + A_ / Math.PI * 180);
-    console.log('> h : ' + h_ / Math.PI * 180);
-    console.log('------------');
-    console.log(' ');
+    return convert_equatorialCoordinates_to_horizontalCoordinates(
+        observer_latitude * Math.PI / 180,
+        celestialObject_declination * Math.PI / 180,
+        revolution(convertDecimalHourToDegrees(hourAngle)) * Math.PI / 180
+    );
 }
 
-// -- Moment de l'observation
-var test_annee = 1987;
-var test_mois = 4;
-var test_jour = 10;
-
-var test_heures = 19;
-var test_minutes = 21;
-var test_secondes = 0;
-
-var test_a = define_year(test_annee, test_mois);
-var test_m = define_month(test_mois);
-var test_A = define_A(test_annee);
-var test_B = define_B(test_A, true);
-var test_JJdd = define_decimalDay(test_jour, test_heures, test_minutes, test_secondes);
-var test_jourJulien = define_JulianDay(test_a, test_m, test_B, test_JJdd);
-var test_Apparent_heureSideraleGreenwich = _360deg(
-    define_apparentSiderealTime_Greenwich(test_jourJulien, define_T(test_jourJulien))
-);
-var test_mean_heureSideraleGreenwich = _360deg(
-    define_meanSiderealTime_Greenwich(
-        define_siderealTime_Greenwich_0(define_T(test_jourJulien)),
-        convertTimeToDecimal(19, 21, 0)
-    )
+// -- TEST
+var result = this.starLocationAlgorithm(1987, 4, 10, 19, 21, 0,
+    convertDMSToDegrees(38, 55, 17), convertDMSToDegrees(-77, 3, 56),
+    convertDMSToDegrees(-6, 43, 11.61), convertTimeToDecimal(23, 9, 16.641)
 );
 
-// console.log('-- Jour julien :: ');
-// console.log(test_jourJulien);
-// console.log('-- Temps sidéral Greenwich :: ');
-// console.log(test_heureSideraleGreenwich);
-
-// -- Observateur
-var test_latitudeObservateur = convertDMSToDegrees(38, 55, 17);
-var test_longitudeObservateur = convertDMSToDegrees(-77, 3, 56);
-
-// console.log('-- Latitude OBS :: ');
-// console.log(test_latitudeObservateur);
-// console.log('-- Longitude OBS :: ');
-// console.log(test_longitudeObservateur);
-
-// -- Informations corps céleste
-var test_declinaison = convertDMSToDegrees(-6, 43, 11.61);
-var test_ascensionDroite = convertTimeToDecimal(23, 9, 16.641);
-var test_angleHoraire = define_angleHoraire(
-    convertDegreesToDecimalHour(test_Apparent_heureSideraleGreenwich),
-    convertDegreesToDecimalHour(test_longitudeObservateur),
-    test_ascensionDroite
-);
-console.log(' ');
-console.log('>> Mean Sidereal Time Greenwich :: ' + test_mean_heureSideraleGreenwich
-    + " => " + convertDegreesToDecimalHour(test_mean_heureSideraleGreenwich));
-
-console.log('>> Apparent Sidereal Time Greenwich :: ' + test_Apparent_heureSideraleGreenwich
-    + " => " + convertDegreesToDecimalHour(test_Apparent_heureSideraleGreenwich)
-    + " -> ");
-
-console.log('>> Longitude observateur :: ' + test_longitudeObservateur
-    + " => " + convertDegreesToDecimalHour(test_longitudeObservateur));
-
-console.log('>> Ascension Droite :: ' + test_ascensionDroite);
-console.log('>> Declinaison :: ' + test_declinaison);
-
-console.log(' ');
-console.log('>> angle horaire :: ' + test_angleHoraire + " >> " + convertDecimalHourToDegrees(test_angleHoraire)
-    + " => " + _360deg(convertDecimalHourToDegrees(test_angleHoraire)));
-console.log(' ');
-console.log('-------------------');
-console.log(' ');
-console.log('> lat :: ' + test_latitudeObservateur * Math.PI / 180);
-convert_coordonneesEquatoriales_to_coordoonneesHorizontales(
-    test_latitudeObservateur * Math.PI / 180,
-    test_declinaison * Math.PI / 180,
-    _360deg(convertDecimalHourToDegrees(test_angleHoraire)) * Math.PI / 180
-);
-
+console.log(result);
