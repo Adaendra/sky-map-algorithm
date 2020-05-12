@@ -12,7 +12,7 @@ A website will be added to use this algorithm and see results.
 --------
 ## How to use it
 In this project you will find some folders named with a langage name which contains algorithms and formulas inside.
-Just pick the langage you need and copy-paste in your project.
+Just pick the langage you need and copy-paste it in your project.
 
 Current languages available :
 * JavaScript
