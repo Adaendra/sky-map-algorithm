@@ -1,5 +1,5 @@
 # Sky Map Algorithm
-Algorithm implementation to locate stars in the sky.
+Algorithm implementation to locate stars in the sky for a date-time and a location.
 
 --------
 ## Objectives
@@ -22,3 +22,7 @@ Current languages available :
 --------
 ## How to participate
 Open an issue to explain what you want to add/or modify, then open a Pull Request with your code.
+
+--------
+## Sources
+[See sources here](sources.md)
