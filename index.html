@@ -6,7 +6,7 @@
     <script src="./javascript/sky-map-algorithm.js"></script>
   </head>
   <body>
-  <canvas id="sky" width="600" height="600"></canvas>
+  <canvas id="sky" width="1000" height="1000"></canvas>
 
 
 
@@ -1672,7 +1672,8 @@
                       45.5017, // latitude
                       9.272106979449653, // temps sidéral
                       0,
-                      data.key
+                      data.key,
+                      data.magnitude
               ))
               .filter(data => data != null)
       ;
@@ -1680,8 +1681,20 @@
       var skyCanvas = document.getElementById("sky");
 
       var ctx = skyCanvas.getContext("2d");
-      ctx.fillStyle = "#000066";
-      ctx.fillRect(0,0,600,600);
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(0,0,1000,1000);
+
+
+      starData.forEach(d => {
+        if (d.magnitude > 3) {
+          ctx.fillStyle = "#ffffff";
+        } else {
+          ctx.fillStyle = "#ff0000";
+        }
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, 1, 0, 2 * Math.PI);
+        ctx.fill();
+      });
 
       console.log(starData[0]);
       console.log(starData);
@@ -1710,15 +1723,15 @@
       }
 
       // ----------------------------------------------
-      function toScreenPosition(rightAscension, declination, longitude, latitude, siderealTime, margin, key) {
+      function toScreenPosition(rightAscension, declination, longitude, latitude, siderealTime, margin, key, magnitude) {
         // Convert to azimuth and height
         var angleHoraireLocal = siderealTime - longitude - rightAscension;
         var intD = Math.cos(angleHoraireLocal) * Math.sin(latitude) - Math.tan(declination) * Math.cos(latitude);
         var azimuth = Math.atan(Math.sin(angleHoraireLocal) / intD);
-/*
+
         if (intD < 0.0) {
           azimuth = azimuth + Math.PI;
-        }*/
+        }
 
         var height = Math.asin(Math.sin(latitude) * Math.sin(declination) + Math.cos(latitude) * Math.cos(declination)
                 * Math.cos(angleHoraireLocal));
@@ -1729,14 +1742,14 @@
           //   height: height,
           //   key: key
           // };
-          return createScreenPosition(azimuth, height, key);
+          return createScreenPosition(azimuth, height, key, magnitude);
         } else {
           return null;
         }
       }
 
 
-      function createScreenPosition(azimuth, height, key) {
+      function createScreenPosition(azimuth, height, key, magnitude) {
         var bounded_x = Math.sin(azimuth) * (1.0 - height / Math.PI * 2.0);
         var bounded_y = Math.cos(azimuth) * (1.0 - height / Math.PI * 2.0);
 
@@ -1746,7 +1759,8 @@
         return {
           x: canvas_x,
           y: canvas_y,
-          key: key
+          key: key,
+          magnitude: magnitude
         };
       }
 
