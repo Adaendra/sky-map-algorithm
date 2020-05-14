@@ -1668,8 +1668,8 @@
               .map(data => toScreenPosition(
                       data.rightAscension,
                       data.declination,
-                      -73.5673, // longitude
-                      45.5017, // latitude
+                      -84.3673, // longitude
+                      44.5017, // latitude
                       9.272106979449653, // temps sidéral
                       0,
                       data.key,
@@ -1686,15 +1686,42 @@
 
 
       starData.forEach(d => {
-        if (d.magnitude > 3) {
-          ctx.fillStyle = "#ffffff";
+        if (d.magnitude < 1) {
+          ctx.fillStyle = "rgba(255, 255, 255, 1)";
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, scale(6), 0, 2 * Math.PI);
+          ctx.fill();
+        } else if (d.magnitude < 2) {
+          ctx.fillStyle = "rgba(223, 223, 223, 1)";
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, scale(5), 0, 2 * Math.PI);
+          ctx.fill();
+        } else if (d.magnitude < 3) {
+          ctx.fillStyle = "rgba(191, 191, 191, 1)";
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, scale(4), 0, 2 * Math.PI);
+          ctx.fill();
+        } else if (d.magnitude < 4) {
+          ctx.fillStyle = "rgba(159, 159, 159, 1)";
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, scale(3), 0, 2 * Math.PI);
+          ctx.fill();
+        } else if (d.magnitude < 4.5) {
+          ctx.fillStyle = "rgba(127, 127, 127, 1)";
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, scale(2), 0, 2 * Math.PI);
+          ctx.fill();
         } else {
-          ctx.fillStyle = "#ff0000";
+          ctx.fillStyle = "rgba(95, 95, 95, 1)";
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, scale(1), 0, 2 * Math.PI);
+          ctx.fill();
         }
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, 1, 0, 2 * Math.PI);
-        ctx.fill();
       });
+
+      function scale(size) {
+        return Math.max(Math.round(size * 639 / 1000), 1);
+      }
 
       console.log(starData[0]);
       console.log(starData);
@@ -1737,11 +1764,6 @@
                 * Math.cos(angleHoraireLocal));
         // Calculate the positions on the screen
         if (height >= margin) {
-          // return  {
-          //   azimuth: azimuth,
-          //   height: height,
-          //   key: key
-          // };
           return createScreenPosition(azimuth, height, key, magnitude);
         } else {
           return null;
@@ -1765,7 +1787,6 @@
       }
 
       function getScreenPositionFromBounded(margin, gap, circleSize, bounded) {
-
         return margin + gap + circleSize / 2 + Math.round(circleSize / 2 * bounded + 0.5)
       }
 
