@@ -8,9 +8,1280 @@
   <body>
   <canvas id="sky" width="1000" height="1000"></canvas>
 
-
-
     <script>
+      var constellations = [
+        {
+          "code": "And",
+          "coordinates": [
+            {
+              "start": 603,
+              "end": 337
+            },
+            {
+              "start": 337,
+              "end": 165
+            },
+            {
+              "start": 165,
+              "end": 15
+            }
+          ]
+        },
+        {
+          "code": "Aql",
+          "coordinates": [
+            {
+              "start": 7236,
+              "end": 7377
+            },
+            {
+              "start": 7377,
+              "end": 7570
+            },
+            {
+              "start": 7570,
+              "end": 7710
+            },
+            {
+              "start": 7710,
+              "end": 7602
+            },
+            {
+              "start": 7602,
+              "end": 7557
+            },
+            {
+              "start": 7557,
+              "end": 7235
+            },
+            {
+              "start": 7235,
+              "end": 7377
+            }
+          ]
+        },
+        {
+          "code": "Aqr",
+          "coordinates": [
+            {
+              "start": 7950,
+              "end": 8232
+            },
+            {
+              "start": 8232,
+              "end": 8414
+            },
+            {
+              "start": 8414,
+              "end": 8518
+            },
+            {
+              "start": 8518,
+              "end": 8698
+            },
+            {
+              "start": 8698,
+              "end": 8709
+            }
+          ]
+        },
+        {
+          "code": "Ari",
+          "coordinates": [
+            {
+              "start": 617,
+              "end": 553
+            }
+          ]
+        },
+        {
+          "code": "Aur",
+          "coordinates": [
+            {
+              "start": 2088,
+              "end": 1708
+            },
+            {
+              "start": 1708,
+              "end": 1605
+            },
+            {
+              "start": 1605,
+              "end": 1641
+            },
+            {
+              "start": 1641,
+              "end": 1577
+            },
+            {
+              "start": 1577,
+              "end": 2095
+            },
+            {
+              "start": 2095,
+              "end": 2088
+            }
+          ]
+        },
+        {
+          "code": "Boo",
+          "coordinates": [
+            {
+              "start": 5235,
+              "end": 5340
+            },
+            {
+              "start": 5340,
+              "end": 5506
+            },
+            {
+              "start": 5506,
+              "end": 5681
+            },
+            {
+              "start": 5681,
+              "end": 5602
+            },
+            {
+              "start": 5602,
+              "end": 5435
+            },
+            {
+              "start": 5435,
+              "end": 5429
+            },
+            {
+              "start": 5429,
+              "end": 5340
+            }
+          ]
+        },
+        {
+          "code": "Cap",
+          "coordinates": [
+            {
+              "start": 7754,
+              "end": 7776
+            },
+            {
+              "start": 7776,
+              "end": 8075
+            },
+            {
+              "start": 8075,
+              "end": 8278
+            },
+            {
+              "start": 8278,
+              "end": 8322
+            },
+            {
+              "start": 8322,
+              "end": 8204
+            }
+          ]
+        },
+        {
+          "code": "Car",
+          "coordinates": [
+            {
+              "start": 2326,
+              "end": 3307
+            },
+            {
+              "start": 3307,
+              "end": 3699
+            },
+            {
+              "start": 3699,
+              "end": 3890
+            },
+            {
+              "start": 3890,
+              "end": 3685
+            },
+            {
+              "start": 3685,
+              "end": 4037
+            }
+          ]
+        },
+        {
+          "code": "Cas",
+          "coordinates": [
+            {
+              "start": 542,
+              "end": 403
+            },
+            {
+              "start": 403,
+              "end": 264
+            },
+            {
+              "start": 264,
+              "end": 168
+            },
+            {
+              "start": 168,
+              "end": 21
+            }
+          ]
+        },
+        {
+          "code": "Cen",
+          "coordinates": [
+            {
+              "start": 4621,
+              "end": 4819
+            },
+            {
+              "start": 4819,
+              "end": 5132
+            },
+            {
+              "start": 5459,
+              "end": 5267
+            },
+            {
+              "start": 5267,
+              "end": 5132
+            },
+            {
+              "start": 5132,
+              "end": 5231
+            },
+            {
+              "start": 5231,
+              "end": 5193
+            },
+            {
+              "start": 5028,
+              "end": 5193
+            },
+            {
+              "start": 5193,
+              "end": 5288
+            },
+            {
+              "start": 5288,
+              "end": 5440
+            },
+            {
+              "start": 5440,
+              "end": 5576
+            }
+          ]
+        },
+        {
+          "code": "Cep",
+          "coordinates": [
+            {
+              "start": 8162,
+              "end": 8465
+            },
+            {
+              "start": 8465,
+              "end": 8571
+            },
+            {
+              "start": 8571,
+              "end": 8694
+            },
+            {
+              "start": 8694,
+              "end": 8974
+            },
+            {
+              "start": 8974,
+              "end": 8238
+            },
+            {
+              "start": 8238,
+              "end": 8162
+            }
+          ]
+        },
+        {
+          "code": "Cet",
+          "coordinates": [
+            {
+              "start": 911,
+              "end": 804
+            },
+            {
+              "start": 804,
+              "end": 681
+            },
+            {
+              "start": 681,
+              "end": 539
+            },
+            {
+              "start": 539,
+              "end": 402
+            },
+            {
+              "start": 402,
+              "end": 334
+            },
+            {
+              "start": 334,
+              "end": 74
+            },
+            {
+              "start": 74,
+              "end": 188
+            },
+            {
+              "start": 188,
+              "end": 334
+            },
+            {
+              "start": 585,
+              "end": 509
+            },
+            {
+              "start": 509,
+              "end": 539
+            }
+          ]
+        },
+        {
+          "code": "CMa",
+          "coordinates": [
+            {
+              "start": 2282,
+              "end": 2618
+            },
+            {
+              "start": 2618,
+              "end": 2693
+            },
+            {
+              "start": 2827,
+              "end": 2693
+            },
+            {
+              "start": 2693,
+              "end": 2653
+            },
+            {
+              "start": 2653,
+              "end": 2491
+            },
+            {
+              "start": 2491,
+              "end": 2294
+            }
+          ]
+        },
+        {
+          "code": "CMi",
+          "coordinates": [
+            {
+              "start": 2943,
+              "end": 2845
+            }
+          ]
+        },
+        {
+          "code": "Cnc",
+          "coordinates": [
+            {
+              "start": 3572,
+              "end": 3461
+            },
+            {
+              "start": 3249,
+              "end": 3461
+            },
+            {
+              "start": 3461,
+              "end": 3449
+            },
+            {
+              "start": 3449,
+              "end": 3475
+            }
+          ]
+        },
+        {
+          "code": "Cru",
+          "coordinates": [
+            {
+              "start": 4730,
+              "end": 4763
+            },
+            {
+              "start": 4853,
+              "end": 4656
+            }
+          ]
+        },
+        {
+          "code": "Cyg",
+          "coordinates": [
+            {
+              "start": 7924,
+              "end": 7796
+            },
+            {
+              "start": 7796,
+              "end": 7615
+            },
+            {
+              "start": 7615,
+              "end": 7417
+            },
+            {
+              "start": 7420,
+              "end": 7528
+            },
+            {
+              "start": 7528,
+              "end": 7796
+            },
+            {
+              "start": 8115,
+              "end": 7949
+            },
+            {
+              "start": 7949,
+              "end": 7796
+            }
+          ]
+        },
+        {
+          "code": "Dra",
+          "coordinates": [
+            {
+              "start": 4434,
+              "end": 4787
+            },
+            {
+              "start": 4787,
+              "end": 5291
+            },
+            {
+              "start": 5291,
+              "end": 5744
+            },
+            {
+              "start": 5744,
+              "end": 5986
+            },
+            {
+              "start": 5986,
+              "end": 6132
+            },
+            {
+              "start": 6132,
+              "end": 6396
+            },
+            {
+              "start": 6396,
+              "end": 6927
+            },
+            {
+              "start": 6927,
+              "end": 7582
+            },
+            {
+              "start": 7582,
+              "end": 7310
+            },
+            {
+              "start": 7310,
+              "end": 6688
+            },
+            {
+              "start": 6688,
+              "end": 6554
+            },
+            {
+              "start": 6554,
+              "end": 6536
+            },
+            {
+              "start": 6536,
+              "end": 6705
+            },
+            {
+              "start": 6705,
+              "end": 6688
+            }
+          ]
+        },
+        {
+          "code": "Eri",
+          "coordinates": [
+            {
+              "start": 472,
+              "end": 674
+            },
+            {
+              "start": 674,
+              "end": 897
+            },
+            {
+              "start": 897,
+              "end": 1347
+            },
+            {
+              "start": 1347,
+              "end": 1003
+            },
+            {
+              "start": 1003,
+              "end": 1136
+            },
+            {
+              "start": 1136,
+              "end": 1231
+            },
+            {
+              "start": 1231,
+              "end": 1666
+            }
+          ]
+        },
+        {
+          "code": "Gem",
+          "coordinates": [
+            {
+              "start": 2216,
+              "end": 2286
+            },
+            {
+              "start": 2286,
+              "end": 2473
+            },
+            {
+              "start": 2473,
+              "end": 2891
+            },
+            {
+              "start": 2891,
+              "end": 2990
+            },
+            {
+              "start": 2990,
+              "end": 2777
+            },
+            {
+              "start": 2777,
+              "end": 2421
+            }
+          ]
+        },
+        {
+          "code": "Gru",
+          "coordinates": [
+            {
+              "start": 8353,
+              "end": 8556
+            },
+            {
+              "start": 8556,
+              "end": 8636
+            },
+            {
+              "start": 8636,
+              "end": 8675
+            },
+            {
+              "start": 8425,
+              "end": 8556
+            }
+          ]
+        },
+        {
+          "code": "Her",
+          "coordinates": [
+            {
+              "start": 6212,
+              "end": 6324
+            },
+            {
+              "start": 6324,
+              "end": 6418
+            },
+            {
+              "start": 6418,
+              "end": 6220
+            },
+            {
+              "start": 6220,
+              "end": 6212
+            },
+            {
+              "start": 6092,
+              "end": 6168
+            },
+            {
+              "start": 6168,
+              "end": 6220
+            },
+            {
+              "start": 6588,
+              "end": 6695
+            },
+            {
+              "start": 6695,
+              "end": 6418
+            },
+            {
+              "start": 6623,
+              "end": 6410
+            },
+            {
+              "start": 6410,
+              "end": 6324
+            },
+            {
+              "start": 6095,
+              "end": 6148
+            },
+            {
+              "start": 6148,
+              "end": 6212
+            },
+            {
+              "start": 6023,
+              "end": 6092
+            }
+          ]
+        },
+        {
+          "code": "Hyd",
+          "coordinates": [
+            {
+              "start": 5287,
+              "end": 5020
+            },
+            {
+              "start": 5020,
+              "end": 4450
+            },
+            {
+              "start": 4450,
+              "end": 4232
+            },
+            {
+              "start": 4232,
+              "end": 3994
+            },
+            {
+              "start": 3994,
+              "end": 3748
+            },
+            {
+              "start": 3748,
+              "end": 3547
+            }
+          ]
+        },
+        {
+          "code": "Hyi",
+          "coordinates": [
+            {
+              "start": 591,
+              "end": 806
+            },
+            {
+              "start": 806,
+              "end": 1208
+            },
+            {
+              "start": 1208,
+              "end": 98
+            }
+          ]
+        },
+        {
+          "code": "Leo",
+          "coordinates": [
+            {
+              "start": 3873,
+              "end": 3905
+            },
+            {
+              "start": 3905,
+              "end": 4031
+            },
+            {
+              "start": 4031,
+              "end": 4057
+            },
+            {
+              "start": 4057,
+              "end": 3975
+            },
+            {
+              "start": 3975,
+              "end": 3982
+            },
+            {
+              "start": 3982,
+              "end": 4359
+            },
+            {
+              "start": 4359,
+              "end": 4534
+            },
+            {
+              "start": 4534,
+              "end": 4357
+            },
+            {
+              "start": 4357,
+              "end": 4057
+            }
+          ]
+        },
+        {
+          "code": "Lib",
+          "coordinates": [
+            {
+              "start": 5787,
+              "end": 5685
+            },
+            {
+              "start": 5685,
+              "end": 5531
+            },
+            {
+              "start": 5531,
+              "end": 5603
+            }
+          ]
+        },
+        {
+          "code": "Lyn",
+          "coordinates": [
+            {
+              "start": 3705,
+              "end": 3690
+            },
+            {
+              "start": 3690,
+              "end": 3275
+            }
+          ]
+        },
+        {
+          "code": "Lyr",
+          "coordinates": [
+            {
+              "start": 7001,
+              "end": 7056
+            },
+            {
+              "start": 7056,
+              "end": 7106
+            },
+            {
+              "start": 7106,
+              "end": 7178
+            },
+            {
+              "start": 7178,
+              "end": 7139
+            },
+            {
+              "start": 7139,
+              "end": 7056
+            }
+          ]
+        },
+        {
+          "code": "Oph",
+          "coordinates": [
+            {
+              "start": 6453,
+              "end": 6378
+            },
+            {
+              "start": 6378,
+              "end": 6603
+            },
+            {
+              "start": 6603,
+              "end": 6556
+            },
+            {
+              "start": 6556,
+              "end": 6299
+            },
+            {
+              "start": 6299,
+              "end": 6056
+            },
+            {
+              "start": 6056,
+              "end": 6075
+            },
+            {
+              "start": 6075,
+              "end": 6175
+            },
+            {
+              "start": 6175,
+              "end": 6378
+            }
+          ]
+        },
+        {
+          "code": "Ori",
+          "coordinates": [
+            {
+              "start": 2061,
+              "end": 1948
+            },
+            {
+              "start": 2004,
+              "end": 1948
+            },
+            {
+              "start": 1790,
+              "end": 1852
+            },
+            {
+              "start": 1713,
+              "end": 1852
+            },
+            {
+              "start": 1852,
+              "end": 1903
+            },
+            {
+              "start": 1948,
+              "end": 1903
+            }
+          ]
+        },
+        {
+          "code": "Pav",
+          "coordinates": [
+            {
+              "start": 7790,
+              "end": 7913
+            },
+            {
+              "start": 7913,
+              "end": 7590
+            },
+            {
+              "start": 7590,
+              "end": 6982
+            },
+            {
+              "start": 6982,
+              "end": 6582
+            },
+            {
+              "start": 6582,
+              "end": 7074
+            },
+            {
+              "start": 7074,
+              "end": 7665
+            },
+            {
+              "start": 7665,
+              "end": 7913
+            }
+          ]
+        },
+        {
+          "code": "Peg",
+          "coordinates": [
+            {
+              "start": 15,
+              "end": 8775
+            },
+            {
+              "start": 8775,
+              "end": 8781
+            },
+            {
+              "start": 8781,
+              "end": 39
+            },
+            {
+              "start": 39,
+              "end": 15
+            },
+            {
+              "start": 8308,
+              "end": 8450
+            },
+            {
+              "start": 8450,
+              "end": 8634
+            },
+            {
+              "start": 8634,
+              "end": 8781
+            },
+            {
+              "start": 8650,
+              "end": 8775
+            }
+          ]
+        },
+        {
+          "code": "Per",
+          "coordinates": [
+            {
+              "start": 915,
+              "end": 1017
+            },
+            {
+              "start": 1017,
+              "end": 1122
+            },
+            {
+              "start": 1122,
+              "end": 1220
+            },
+            {
+              "start": 1220,
+              "end": 1203
+            },
+            {
+              "start": 936,
+              "end": 1017
+            }
+          ]
+        },
+        {
+          "code": "PsA",
+          "coordinates": [
+            {
+              "start": 8728,
+              "end": 8628
+            },
+            {
+              "start": 8628,
+              "end": 8305
+            },
+            {
+              "start": 8305,
+              "end": 8431
+            },
+            {
+              "start": 8431,
+              "end": 8576
+            },
+            {
+              "start": 8576,
+              "end": 8695
+            },
+            {
+              "start": 8695,
+              "end": 8720
+            },
+            {
+              "start": 8720,
+              "end": 8728
+            }
+          ]
+        },
+        {
+          "code": "Psc",
+          "coordinates": [
+            {
+              "start": 8852,
+              "end": 596
+            },
+            {
+              "start": 596,
+              "end": 437
+            }
+          ]
+        },
+        {
+          "code": "Pup",
+          "coordinates": [
+            {
+              "start": 2773,
+              "end": 2451
+            },
+            {
+              "start": 2451,
+              "end": 2553
+            },
+            {
+              "start": 2553,
+              "end": 2878
+            },
+            {
+              "start": 2878,
+              "end": 3165
+            },
+            {
+              "start": 3165,
+              "end": 2773
+            },
+            {
+              "start": 3185,
+              "end": 3045
+            },
+            {
+              "start": 3045,
+              "end": 2773
+            }
+          ]
+        },
+        {
+          "code": "Sco",
+          "coordinates": [
+            {
+              "start": 5984,
+              "end": 6084
+            },
+            {
+              "start": 5953,
+              "end": 6084
+            },
+            {
+              "start": 5944,
+              "end": 6084
+            },
+            {
+              "start": 6084,
+              "end": 6134
+            },
+            {
+              "start": 6134,
+              "end": 6165
+            },
+            {
+              "start": 6165,
+              "end": 6241
+            },
+            {
+              "start": 6241,
+              "end": 6247
+            },
+            {
+              "start": 6247,
+              "end": 6271
+            },
+            {
+              "start": 6271,
+              "end": 6380
+            },
+            {
+              "start": 6380,
+              "end": 6553
+            },
+            {
+              "start": 6553,
+              "end": 6615
+            },
+            {
+              "start": 6615,
+              "end": 6580
+            },
+            {
+              "start": 6580,
+              "end": 6527
+            }
+          ]
+        },
+        {
+          "code": "Sgr",
+          "coordinates": [
+            {
+              "start": 7264,
+              "end": 7121
+            },
+            {
+              "start": 7194,
+              "end": 7234
+            },
+            {
+              "start": 7234,
+              "end": 7121
+            },
+            {
+              "start": 7121,
+              "end": 7039
+            },
+            {
+              "start": 7039,
+              "end": 6913
+            },
+            {
+              "start": 6913,
+              "end": 6859
+            },
+            {
+              "start": 6859,
+              "end": 6879
+            },
+            {
+              "start": 6879,
+              "end": 6832
+            }
+          ]
+        },
+        {
+          "code": "Tau",
+          "coordinates": [
+            {
+              "start": 1910,
+              "end": 1457
+            },
+            {
+              "start": 1457,
+              "end": 1346
+            },
+            {
+              "start": 1346,
+              "end": 1409
+            },
+            {
+              "start": 1409,
+              "end": 1791
+            },
+            {
+              "start": 1038,
+              "end": 1239
+            },
+            {
+              "start": 1239,
+              "end": 1346
+            }
+          ]
+        },
+        {
+          "code": "UMa",
+          "coordinates": [
+            {
+              "start": 5191,
+              "end": 5054
+            },
+            {
+              "start": 5054,
+              "end": 4905
+            },
+            {
+              "start": 4905,
+              "end": 4660
+            },
+            {
+              "start": 4660,
+              "end": 4301
+            },
+            {
+              "start": 4301,
+              "end": 4295
+            },
+            {
+              "start": 4295,
+              "end": 4554
+            },
+            {
+              "start": 4554,
+              "end": 4660
+            }
+          ]
+        },
+        {
+          "code": "UMi",
+          "coordinates": [
+            {
+              "start": 424,
+              "end": 6789
+            },
+            {
+              "start": 6789,
+              "end": 6322
+            },
+            {
+              "start": 6322,
+              "end": 5903
+            },
+            {
+              "start": 5903,
+              "end": 5563
+            },
+            {
+              "start": 5563,
+              "end": 5735
+            },
+            {
+              "start": 5735,
+              "end": 6116
+            },
+            {
+              "start": 6116,
+              "end": 5903
+            }
+          ]
+        },
+        {
+          "code": "Vel",
+          "coordinates": [
+            {
+              "start": 3207,
+              "end": 3485
+            },
+            {
+              "start": 3485,
+              "end": 3734
+            },
+            {
+              "start": 3734,
+              "end": 3634
+            },
+            {
+              "start": 3634,
+              "end": 3207
+            }
+          ]
+        },
+        {
+          "code": "Vir",
+          "coordinates": [
+            {
+              "start": 4517,
+              "end": 4540
+            },
+            {
+              "start": 4540,
+              "end": 4689
+            },
+            {
+              "start": 4689,
+              "end": 4825
+            },
+            {
+              "start": 4932,
+              "end": 4910
+            },
+            {
+              "start": 4910,
+              "end": 4825
+            },
+            {
+              "start": 4825,
+              "end": 4963
+            },
+            {
+              "start": 4963,
+              "end": 5107
+            },
+            {
+              "start": 5056,
+              "end": 4963
+            }
+          ]
+        }
+      ]
       var lines = "   3      Psc 00 05 20.1 -05 42 27  4.61\n" +
               "  15 alf  And 00 08 23.2 +29 05 26  2.06\n" +
               "  21 bet  Cas 00 09 10.6 +59 08 59  2.27\n" +
@@ -1640,6 +2911,10 @@
               "9098      Cet 00 03 44.3 -17 20 10  4.56\n" +
               "9103      Cet 00 04 30.0 -10 30 35  4.98".split("\n");
 
+    </script>
+
+    <script>
+
 
       function StarData(key, starName, constellationName, raH, raM, raS, decD, decM, decS, magnitude) {
         return {
@@ -1668,9 +2943,9 @@
               .map(data => toScreenPosition(
                       data.rightAscension,
                       data.declination,
-                      -84.3673, // longitude
-                      44.5017, // latitude
-                      9.272106979449653, // temps sidéral
+                      139.6503 * -1 * Math.PI / 180, // longitude
+                      35.6762 * Math.PI / 180, // latitude
+                      9.030220895170226, // temps sidéral
                       0,
                       data.key,
                       data.magnitude
@@ -1685,8 +2960,54 @@
       ctx.fillRect(0,0,1000,1000);
 
 
+      var constellationsData = constellations.map(a => {
+        return {
+          code: a.code,
+          coordinates: a.coordinates.map(c => {
+            return {
+              start : starData.filter(k => k.key == c.start)[0],
+              end : starData.filter(k => k.key == c.end)[0]
+            }
+          })
+        }
+      });
+
+      console.log(constellationsData);
+      constellationsData.forEach(c => {
+        c.coordinates.forEach(cc => {
+          if (cc.start != undefined && cc.end != undefined) {
+            console.log(c.code)
+            ctx.strokeStyle = "red";
+            ctx.beginPath();
+            ctx.moveTo(cc.start.x, cc.start.y);
+            ctx.lineTo(cc.end.x, cc.end.y);
+            ctx.stroke();
+          }
+        })
+      });
+
       starData.forEach(d => {
-        if (d.magnitude < 1) {
+        if (d.key == 4434 ||
+            d.key == 4787 ||
+            d.key == 5291 ||
+            d.key == 5744 ||
+            d.key == 5986 ||
+            d.key == 6132 ||
+            d.key == 6396 ||
+            d.key == 6927 ||
+            d.key == 7582 ||
+            d.key == 7310 ||
+            d.key == 6688 ||
+            d.key == 6554 ||
+            d.key == 6536 ||
+            d.key == 6705 ||
+            d.key == 6688
+      ) {
+          ctx.fillStyle = "rgba(255, 0, 0, 1)";
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, scale(6), 0, 2 * Math.PI);
+          ctx.fill();
+        } else if (d.magnitude < 1) {
           ctx.fillStyle = "rgba(255, 255, 255, 1)";
           ctx.beginPath();
           ctx.arc(d.x, d.y, scale(6), 0, 2 * Math.PI);
