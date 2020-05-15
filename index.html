@@ -2976,8 +2976,8 @@
       constellationsData.forEach(c => {
         c.coordinates.forEach(cc => {
           if (cc.start != undefined && cc.end != undefined) {
-            console.log(c.code)
-            ctx.strokeStyle = "red";
+            console.log(c.code);
+            ctx.strokeStyle = "rgba(185,185,185,0.2)";
             ctx.beginPath();
             ctx.moveTo(cc.start.x, cc.start.y);
             ctx.lineTo(cc.end.x, cc.end.y);
@@ -2987,54 +2987,46 @@
       });
 
       starData.forEach(d => {
-        if (d.key == 4434 ||
-            d.key == 4787 ||
-            d.key == 5291 ||
-            d.key == 5744 ||
-            d.key == 5986 ||
-            d.key == 6132 ||
-            d.key == 6396 ||
-            d.key == 6927 ||
-            d.key == 7582 ||
-            d.key == 7310 ||
-            d.key == 6688 ||
-            d.key == 6554 ||
-            d.key == 6536 ||
-            d.key == 6705 ||
-            d.key == 6688
-      ) {
-          ctx.fillStyle = "rgba(255, 0, 0, 1)";
-          ctx.beginPath();
-          ctx.arc(d.x, d.y, scale(6), 0, 2 * Math.PI);
-          ctx.fill();
-        } else if (d.magnitude < 1) {
+        if (d.magnitude < 1) {
           ctx.fillStyle = "rgba(255, 255, 255, 1)";
           ctx.beginPath();
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "rgba(255,255,255,0.5)";
           ctx.arc(d.x, d.y, scale(6), 0, 2 * Math.PI);
           ctx.fill();
         } else if (d.magnitude < 2) {
           ctx.fillStyle = "rgba(223, 223, 223, 1)";
           ctx.beginPath();
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "rgba(255,255,255,0.5)";
           ctx.arc(d.x, d.y, scale(5), 0, 2 * Math.PI);
           ctx.fill();
         } else if (d.magnitude < 3) {
           ctx.fillStyle = "rgba(191, 191, 191, 1)";
           ctx.beginPath();
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "rgba(255,255,255,0.5)";
           ctx.arc(d.x, d.y, scale(4), 0, 2 * Math.PI);
           ctx.fill();
         } else if (d.magnitude < 4) {
           ctx.fillStyle = "rgba(159, 159, 159, 1)";
           ctx.beginPath();
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "rgba(255,255,255,0.5)";
           ctx.arc(d.x, d.y, scale(3), 0, 2 * Math.PI);
           ctx.fill();
         } else if (d.magnitude < 4.5) {
           ctx.fillStyle = "rgba(127, 127, 127, 1)";
           ctx.beginPath();
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "rgba(255,255,255,0.5)";
           ctx.arc(d.x, d.y, scale(2), 0, 2 * Math.PI);
           ctx.fill();
         } else {
           ctx.fillStyle = "rgba(95, 95, 95, 1)";
           ctx.beginPath();
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "rgba(255,255,255,0.5)";
           ctx.arc(d.x, d.y, scale(1), 0, 2 * Math.PI);
           ctx.fill();
         }
@@ -3096,8 +3088,8 @@
         var bounded_x = Math.sin(azimuth) * (1.0 - height / Math.PI * 2.0);
         var bounded_y = Math.cos(azimuth) * (1.0 - height / Math.PI * 2.0);
 
-        var canvas_x = getScreenPositionFromBounded(30, 15, 600, bounded_x);
-        var canvas_y = getScreenPositionFromBounded(30, 10, 600, bounded_y);
+        var canvas_x = getScreenPositionFromBounded(30, 15, 900, bounded_x);
+        var canvas_y = getScreenPositionFromBounded(30, 10, 900, bounded_y);
 
         return {
           x: canvas_x,
