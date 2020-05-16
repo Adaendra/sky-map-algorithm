@@ -3037,9 +3037,6 @@
         return Math.max(Math.round(size * 639 / 1000), 1);
       }
 
-      console.log(starData[0]);
-      console.log(starData);
-
       function splitData(datas) {
         return  StarData(parseInt(trim(datas.slice(0, 4))), trim(datas.slice(5, 9)), trim(datas
                 .slice(10, 13)), trim(datas.slice(14, 16)), trim(datas.slice(17, 19)), trim(datas
@@ -3070,20 +3067,6 @@
         var angleHoraireLocal = siderealTime - longitude - rightAscension;
         var intD = Math.cos(angleHoraireLocal) * Math.sin(latitude) - Math.tan(declination) * Math.cos(latitude);
         var azimuth = Math.atan(Math.sin(angleHoraireLocal) / intD);
-        if (key == "3"){
-          console.log('siderealTime : ' + siderealTime)
-          console.log('longitude : ' + longitude)
-          console.log('localSiderealTime : ' + (siderealTime - longitude))
-          console.log('rightAscension : ' + rightAscension)
-          console.log('***')
-          console.log("latitude : " + latitude)
-          console.log("declination : " + declination)
-          console.log("hourAngleRad : " + angleHoraireLocal)
-          console.log('  ')
-          console.log('  ')
-          console.log("intD : " + intD)
-          console.log('  ')
-        }
 
         if (intD < 0.0) {
           azimuth = azimuth + Math.PI;
@@ -3092,13 +3075,6 @@
         var height = Math.asin(Math.sin(latitude) * Math.sin(declination) + Math.cos(latitude) * Math.cos(declination)
                 * Math.cos(angleHoraireLocal));
 
-        if (key == 3) {
-          console.log("rightAscension : " + rightAscension);
-          console.log("declination : " + declination);
-          console.log(' ');
-          console.log("azimuth : " + azimuth);
-          console.log("height : " + height);
-        }
         // Calculate the positions on the screen
         if (height >= margin) {
           return createScreenPosition(azimuth, height, key, magnitude);
