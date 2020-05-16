@@ -26,7 +26,7 @@ export module Algorithm {
      * @param _s: number - Seconds.
      * @return number - Decimal time.
      */
-    export function convertTimeToDecimal(_h, _m, _s): number {
+    export function convertTimeToDecimal(_h : number, _m : number, _s : number): number {
         return UtilsService.convertTimeToDecimal(_h, _m, _s);
     }
 
@@ -50,10 +50,13 @@ export module Algorithm {
         var siderealTimeGreenwich = UtilsService.revolution(
             SiderealTimeService.define_apparentSiderealTime_Greenwich(GregorianDateTimeService.convertToJulianDay(dateTime).value)
         );
+
         var observerSiderealTime = UtilsService.convertDegreesToDecimalHour(siderealTimeGreenwich)
-            + UtilsService.convertDegreesToDecimalHour(observer_longitude.degreesValue());
+             + observer_longitude.radianValue();
 
         var hourCoordinates = CoordinatesConverterService.convert_equatorialCoordinates_to_hourCoordinates(equatorialCoordinates, observerSiderealTime);
-        return CoordinatesConverterService.convert_hourCoordinates_to_horizontalCoordinates(hourCoordinates, observer_latitude.degreesValue());
+
+        return CoordinatesConverterService.convert_hourCoordinates_to_horizontalCoordinates(hourCoordinates, observer_latitude.radianValue());
     }
+
 }

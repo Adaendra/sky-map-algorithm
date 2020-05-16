@@ -2943,9 +2943,9 @@
               .map(data => toScreenPosition(
                       data.rightAscension,
                       data.declination,
-                      139.6503 * -1 * Math.PI / 180, // longitude
-                      35.6762 * Math.PI / 180, // latitude
-                      9.030220895170226, // temps sidéral
+                      -77.06555556 * -1 * Math.PI / 180, // longitude
+                      38.921388889 * Math.PI / 180, // latitude
+                      3.6441791356541215, // temps sidéral
                       0,
                       data.key,
                       data.magnitude
@@ -2976,7 +2976,7 @@
       constellationsData.forEach(c => {
         c.coordinates.forEach(cc => {
           if (cc.start != undefined && cc.end != undefined) {
-            console.log(c.code);
+            //console.log(c.code);
             ctx.strokeStyle = "rgba(255,255,255,0.2)";
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -3055,6 +3055,7 @@
         } else {
           declination = Math.PI / 180.0 * (parseFloat(datas.decD) + parseFloat(datas.decM) / 60.0 + parseFloat(datas.decS) / 3600.0);
         }
+
         return {
           key: datas.key,
           magnitude: datas.magnitude,
@@ -3069,6 +3070,20 @@
         var angleHoraireLocal = siderealTime - longitude - rightAscension;
         var intD = Math.cos(angleHoraireLocal) * Math.sin(latitude) - Math.tan(declination) * Math.cos(latitude);
         var azimuth = Math.atan(Math.sin(angleHoraireLocal) / intD);
+        if (key == "3"){
+          console.log('siderealTime : ' + siderealTime)
+          console.log('longitude : ' + longitude)
+          console.log('localSiderealTime : ' + (siderealTime - longitude))
+          console.log('rightAscension : ' + rightAscension)
+          console.log('***')
+          console.log("latitude : " + latitude)
+          console.log("declination : " + declination)
+          console.log("hourAngleRad : " + angleHoraireLocal)
+          console.log('  ')
+          console.log('  ')
+          console.log("intD : " + intD)
+          console.log('  ')
+        }
 
         if (intD < 0.0) {
           azimuth = azimuth + Math.PI;
@@ -3076,6 +3091,14 @@
 
         var height = Math.asin(Math.sin(latitude) * Math.sin(declination) + Math.cos(latitude) * Math.cos(declination)
                 * Math.cos(angleHoraireLocal));
+
+        if (key == 3) {
+          console.log("rightAscension : " + rightAscension);
+          console.log("declination : " + declination);
+          console.log(' ');
+          console.log("azimuth : " + azimuth);
+          console.log("height : " + height);
+        }
         // Calculate the positions on the screen
         if (height >= margin) {
           return createScreenPosition(azimuth, height, key, magnitude);
@@ -3089,8 +3112,8 @@
         var bounded_x = Math.sin(azimuth) * (1.0 - height / Math.PI * 2.0);
         var bounded_y = Math.cos(azimuth) * (1.0 - height / Math.PI * 2.0);
 
-        var canvas_x = getScreenPositionFromBounded(30, 15, 900, bounded_x);
-        var canvas_y = getScreenPositionFromBounded(30, 10, 900, bounded_y);
+        var canvas_x = getScreenPositionFromBounded(30, 15, 600, bounded_x);
+        var canvas_y = getScreenPositionFromBounded(30, 10, 600, bounded_y);
 
         return {
           x: canvas_x,

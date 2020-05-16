@@ -18,5 +18,9 @@ export class DMSCoordinates {
         return UtilsService.convertDMSToDegrees(this.degrees, this.minutes, this.seconds);
     }
 
+    public radianValue(): number {
+        return UtilsService.convertDMSToDegrees(this.degrees, this.minutes, this.seconds) * Math.PI / 180;
+    }
+
 
 }

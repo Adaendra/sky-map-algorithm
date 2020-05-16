@@ -27,7 +27,7 @@ export class UtilsService {
      * @param _m : number - Minutes.
      * @param _s : number - Seconds.
      */
-    public static convertTimeToDecimal(_h, _m, _s) {
+    public static convertTimeToDecimal(_h : number, _m : number, _s : number) {
         return _h + _m / 60 + _s / 3600;
     }
 
