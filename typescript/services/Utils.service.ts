@@ -1,5 +1,3 @@
-import {DMSCoordinates} from "../models/coordinates/DMSCoordinates";
-
 export class UtilsService {
 
     // PUBLIC METHODS
@@ -40,18 +38,6 @@ export class UtilsService {
         } else {
             return _d + _m / 60 + _s / 3600;
         }
-    }
-
-    public static convertDegreesToDMS(_r): DMSCoordinates {
-        var d_decimal = _r;
-        var d = Math.floor(d_decimal);
-
-        var m_decimal = (d_decimal - d) * 60;
-        var m = Math.floor(m_decimal);
-
-        var s = (m_decimal - m) * 60;
-
-        return new DMSCoordinates(d, m, s);
     }
 
     // ----- Degrees <-> Decimal Hour -----
