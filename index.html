@@ -2977,7 +2977,8 @@
         c.coordinates.forEach(cc => {
           if (cc.start != undefined && cc.end != undefined) {
             console.log(c.code);
-            ctx.strokeStyle = "rgba(185,185,185,0.2)";
+            ctx.strokeStyle = "rgba(255,255,255,0.2)";
+            ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(cc.start.x, cc.start.y);
             ctx.lineTo(cc.end.x, cc.end.y);
