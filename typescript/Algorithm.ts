@@ -1,9 +1,10 @@
-import {GregorianDateTimeService} from "./formulas/GregorianDateTime";
+import {GregorianDateTimeService} from "./services/GregorianDateTime.service";
 import {DMSCoordinates} from "./models/coordinates/DMSCoordinates";
-import {Utils} from "./services/Utils";
+import {UtilsService} from "./services/Utils.service";
 import {EquatorialCoordinates} from "./models/coordinates/EquatorialCoordinates";
-import {SiderealTime} from "./services/SiderealTime";
+import {SiderealTimeService} from "./services/SiderealTime.service";
 import {CoordinatesConverterService} from "./services/CoordinatesConverter.service";
+import {GregorianDateTime} from "./models/time/GregorianDateTime";
 
 export module Algorithm {
 
@@ -15,7 +16,7 @@ export module Algorithm {
      * @return number - Decimal degree value.
      */
     export function convertDMSToDegrees(_d, _m, _s): number {
-        return Utils.convertDMSToDegrees(_d, _m, _s);
+        return UtilsService.convertDMSToDegrees(_d, _m, _s);
     }
 
     /**
@@ -26,7 +27,7 @@ export module Algorithm {
      * @return number - Decimal time.
      */
     export function convertTimeToDecimal(_h, _m, _s): number {
-        return Utils.convertTimeToDecimal(_h, _m, _s);
+        return UtilsService.convertTimeToDecimal(_h, _m, _s);
     }
 
     /**
@@ -38,7 +39,7 @@ export module Algorithm {
      * @param rightAscension
      */
     export function calculateHorizontalCoordinates(
-        dateTime : GregorianDateTimeService,
+        dateTime : GregorianDateTime,
         observer_latitude: DMSCoordinates,
         observer_longitude : DMSCoordinates,
         declination: number,
@@ -46,11 +47,11 @@ export module Algorithm {
     ) {
         var equatorialCoordinates = new EquatorialCoordinates(rightAscension, declination);
 
-        var siderealTimeGreenwich = Utils.revolution(
-            SiderealTime.define_apparentSiderealTime_Greenwich(dateTime.convertToJulianDay().value)
+        var siderealTimeGreenwich = UtilsService.revolution(
+            SiderealTimeService.define_apparentSiderealTime_Greenwich(GregorianDateTimeService.convertToJulianDay(dateTime).value)
         );
-        var observerSiderealTime = Utils.convertDegreesToDecimalHour(siderealTimeGreenwich)
-            + Utils.convertDegreesToDecimalHour(observer_longitude.degreesValue());
+        var observerSiderealTime = UtilsService.convertDegreesToDecimalHour(siderealTimeGreenwich)
+            + UtilsService.convertDegreesToDecimalHour(observer_longitude.degreesValue());
 
         var hourCoordinates = CoordinatesConverterService.convert_equatorialCoordinates_to_hourCoordinates(equatorialCoordinates, observerSiderealTime);
         return CoordinatesConverterService.convert_hourCoordinates_to_horizontalCoordinates(hourCoordinates, observer_latitude.degreesValue());

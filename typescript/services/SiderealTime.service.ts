@@ -1,7 +1,7 @@
 /**
  * 'Astronomical Algorithms' by Jean Meeus
  */
-export class SiderealTime {
+export class SiderealTimeService {
 
     // PUBLIC METHODS
     /**

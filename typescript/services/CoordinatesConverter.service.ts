@@ -1,6 +1,6 @@
 import {HourCoordinates} from "../models/coordinates/HourCoordinates";
 import {EquatorialCoordinates} from "../models/coordinates/EquatorialCoordinates";
-import {Utils} from "./Utils";
+import {UtilsService} from "./Utils.service";
 import {HorizontalCoordinates} from "../models/coordinates/HorizontalCoordinates";
 
 export class CoordinatesConverterService {
@@ -34,7 +34,7 @@ export class CoordinatesConverterService {
     ): HorizontalCoordinates {
         _observerLatitude = _observerLatitude * Math.PI / 180;
         var declinaisonRad = _hourCoordinates.declination * Math.PI / 180;
-        var hourAngleRad = Utils.revolution(Utils.convertDecimalHourToDegrees(_hourCoordinates.hourAngle)) * Math.PI / 180;
+        var hourAngleRad = UtilsService.revolution(UtilsService.convertDecimalHourToDegrees(_hourCoordinates.hourAngle)) * Math.PI / 180;
 
 
         // Formula 13.5 -> p.93

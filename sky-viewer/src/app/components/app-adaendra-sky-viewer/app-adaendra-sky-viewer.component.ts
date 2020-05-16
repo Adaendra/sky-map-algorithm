@@ -6,7 +6,7 @@ import starsData from "./../../../../../data/stars_data.json";
 import constellationData from "./../../../../../data/constellations_data.json";
 import {StarData} from "../../../../../typescript/models/data/StarData";
 import {ConstellationData} from "../../../../../typescript/models/data/ConstellationData";
-import {GregorianDateTimeService} from "../../../../../typescript/formulas/GregorianDateTime";
+import {GregorianDateTimeService} from "../../../../../typescript/services/GregorianDateTime.service";
 import {DMSCoordinates} from "../../../../../typescript/models/coordinates/DMSCoordinates";
 
 @Component({

@@ -1,6 +1,6 @@
 import {DMSCoordinates} from "../models/coordinates/DMSCoordinates";
 
-export class Utils {
+export class UtilsService {
 
     // PUBLIC METHODS
     /**
@@ -79,8 +79,8 @@ export class Utils {
     // }
 
     public static define_hourAngle(_greenwichSiderealTime: number, _observerLongitude: number, _rightAscension: number) {
-        return Utils.convertDegreesToDecimalHour(_greenwichSiderealTime)
-            + Utils.convertDegreesToDecimalHour(_observerLongitude)
+        return UtilsService.convertDegreesToDecimalHour(_greenwichSiderealTime)
+            + UtilsService.convertDegreesToDecimalHour(_observerLongitude)
             - _rightAscension;
     }
 

@@ -1,4 +1,4 @@
-import {Utils} from "../../services/Utils";
+import {UtilsService} from "../../services/Utils.service";
 
 export class DMSCoordinates {
     // ATTRIBUTES
@@ -15,7 +15,7 @@ export class DMSCoordinates {
 
     // PUBLIC METHODS
     public degreesValue(): number {
-        return Utils.convertDMSToDegrees(this.degrees, this.minutes, this.seconds);
+        return UtilsService.convertDMSToDegrees(this.degrees, this.minutes, this.seconds);
     }
 
 

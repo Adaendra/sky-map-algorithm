@@ -1,5 +1,5 @@
-import {JulianDay} from "./JulianDay";
 import {GregorianDateTime} from "../models/time/GregorianDateTime";
+import {JulianDay} from "../models/time/JulianDay";
 
 /**
  * 'Astronomical Algorithms' by Jean Meeus

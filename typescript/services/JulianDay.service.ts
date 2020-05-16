@@ -1,21 +1,15 @@
-import {GregorianDateTimeService} from "./GregorianDateTime";
+import {JulianDay} from "../models/time/JulianDay";
+import {GregorianDateTime} from "../models/time/GregorianDateTime";
 
 /**
  * 'Astronomical Algorithms' by Jean Meeus
  * Chapiter 7 -> p.63
  */
-export class JulianDay {
-    // ATTRIBUTES
-    public value: number;
-
-    // CONSTRUCTORS
-    constructor(value: number) {
-        this.value = value;
-    }
+export class JulianDayService {
 
     // PUBLIC METHODS
-    convertToGregorianDay(): GregorianDateTimeService {
-        var J = this.value + 0.5;
+    public static convertToGregorianDay(julianDay: JulianDay): GregorianDateTime {
+        var J = julianDay.value + 0.5;
         var Z = Math.floor(J);
         var F = J - Math.floor(J);
 
@@ -39,12 +33,12 @@ export class JulianDay {
 
         var seconds = Math.floor((minutes_decimal - minutes) * 60);
 
-        return new GregorianDateTimeService(year, month, day, hours, minutes, seconds);
+        return new GregorianDateTime(year, month, day, hours, minutes, seconds, 0);
     }
 
 
     // PRIVATE METHODS
-    private define_A(_Z) {
+    private static define_A(_Z) {
         if (_Z < 2299161) {
             return _Z;
         } else {
