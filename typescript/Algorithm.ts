@@ -3,7 +3,7 @@ import {DMSCoordinates} from "./models/DMSCoordinates";
 import {Utils} from "./formulas/Utils";
 import {EquatorialCoordinates} from "./models/EquatorialCoordinates";
 import {SiderealTime} from "./formulas/SiderealTime";
-import {CoordinatesConverterService} from "./services/ConvertCoordinates.service";
+import {CoordinatesConverterService} from "./services/CoordinatesConverter.service";
 
 export module Algorithm {
 
