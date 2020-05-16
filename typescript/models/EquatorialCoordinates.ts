@@ -12,11 +12,6 @@ export class EquatorialCoordinates {
     }
 
     // PUBLIC METHODS
-    public convert_to_hourCoordinates(_observerTimeSidereal) {
-        return new HourCoordinates(
-            (_observerTimeSidereal - this.rightAscension),
-            this.declination
-        );
-    }
+
 
 }

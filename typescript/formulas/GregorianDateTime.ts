@@ -15,14 +15,23 @@ export class GregorianDateTime {
     public seconds: number;
 
     // CONSTRUCTOR
+    /**
+     * @param year : number
+     * @param month : number
+     * @param day : number
+     * @param hours : number
+     * @param minutes : number
+     * @param seconds : number
+     * @param timeZone: number
+     */
     constructor(
-        year: number, month: number, day: number, hours: number, minutes: number, seconds: number
+        year: number, month: number, day: number, hours: number, minutes: number, seconds: number, timeZone: number
     ) {
         this.year = year;
         this.month = month;
         this.day = day;
-        this.hours = hours;
-        this.minutes = minutes;
+        this.hours = hours - Math.floor(timeZone);
+        this.minutes = minutes - (timeZone % 1);
         this.seconds = seconds;
     }
 
@@ -30,10 +39,23 @@ export class GregorianDateTime {
     convertToJulianDay(): JulianDay {
         var jd_year = this.define_year(this.year, this.month);
         var jd_month = this.define_month(this.month);
-        var jd_day = this.define_decimalDay(this.day, 19, 21,0);
+        var jd_day = this.define_decimalDay(this.day, this.hours, this.minutes, this.seconds);
         var jd_A = this.define_A(jd_year);
         var jd_B = this.define_B(jd_A, true);
         return new JulianDay(this.calculate_JulianDay(jd_year, jd_month, jd_B, jd_day));
+    }
+
+    static now(): GregorianDateTime {
+        var d = new Date();
+        return new GregorianDateTime(
+            d.getFullYear(),
+            d.getMonth(),
+            d.getDay(),
+            d.getHours(),
+            d.getMinutes(),
+            d.getSeconds(),
+            d.getTimezoneOffset() / 60
+        );
     }
 
     // PRIVATE METHODS

@@ -9,7 +9,8 @@ export module Main {
     export function hello() {
         var dateTime: GregorianDateTime = new GregorianDateTime(
             1987, 4, 10,
-            19, 21, 0
+            19, 21, 0,
+            0
         );
 
         var observer_latitude = new DMSCoordinates(38, 55, 17);
