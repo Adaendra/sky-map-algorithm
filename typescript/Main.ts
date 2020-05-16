@@ -1,13 +1,13 @@
-import {GregorianDateTime} from "./formulas/GregorianDateTime";
-import {DMSCoordinates} from "./models/DMSCoordinates";
-import {Utils} from "./formulas/Utils";
+import {GregorianDateTimeService} from "./formulas/GregorianDateTime";
+import {DMSCoordinates} from "./models/coordinates/DMSCoordinates";
+import {Utils} from "./services/Utils";
 import {Algorithm} from "./Algorithm";
 
 export module Main {
 
     // TODO : Modifier cette méthode pour qu'elle aie lire la liste des étoiles et calcule leur position pour chacune d'entre elles.
     export function hello() {
-        var dateTime: GregorianDateTime = new GregorianDateTime(
+        var dateTime: GregorianDateTimeService = new GregorianDateTimeService(
             1987, 4, 10,
             19, 21, 0,
             0

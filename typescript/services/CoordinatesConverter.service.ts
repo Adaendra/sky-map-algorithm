@@ -1,7 +1,7 @@
-import {HourCoordinates} from "../models/HourCoordinates";
-import {EquatorialCoordinates} from "../models/EquatorialCoordinates";
-import {Utils} from "../formulas/Utils";
-import {HorizontalCoordinates} from "../models/HorizontalCoordinates";
+import {HourCoordinates} from "../models/coordinates/HourCoordinates";
+import {EquatorialCoordinates} from "../models/coordinates/EquatorialCoordinates";
+import {Utils} from "./Utils";
+import {HorizontalCoordinates} from "../models/coordinates/HorizontalCoordinates";
 
 export class CoordinatesConverterService {
 

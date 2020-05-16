@@ -1,4 +1,4 @@
-import {DMSCoordinates} from "../models/DMSCoordinates";
+import {DMSCoordinates} from "../models/coordinates/DMSCoordinates";
 
 export class Utils {
 

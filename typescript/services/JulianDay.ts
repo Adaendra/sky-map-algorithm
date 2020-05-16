@@ -1,4 +1,4 @@
-import {GregorianDateTime} from "./GregorianDateTime";
+import {GregorianDateTimeService} from "./GregorianDateTime";
 
 /**
  * 'Astronomical Algorithms' by Jean Meeus
@@ -14,7 +14,7 @@ export class JulianDay {
     }
 
     // PUBLIC METHODS
-    convertToGregorianDay(): GregorianDateTime {
+    convertToGregorianDay(): GregorianDateTimeService {
         var J = this.value + 0.5;
         var Z = Math.floor(J);
         var F = J - Math.floor(J);
@@ -39,7 +39,7 @@ export class JulianDay {
 
         var seconds = Math.floor((minutes_decimal - minutes) * 60);
 
-        return new GregorianDateTime(year, month, day, hours, minutes, seconds);
+        return new GregorianDateTimeService(year, month, day, hours, minutes, seconds);
     }
 
 

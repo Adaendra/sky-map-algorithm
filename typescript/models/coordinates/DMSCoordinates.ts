@@ -1,4 +1,4 @@
-import {Utils} from "../formulas/Utils";
+import {Utils} from "../../services/Utils";
 
 export class DMSCoordinates {
     // ATTRIBUTES

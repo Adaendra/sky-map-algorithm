@@ -1,4 +1,4 @@
-import {HorizontalCoordinates} from "./HorizontalCoordinates";
+import {HorizontalCoordinates} from "../coordinates/HorizontalCoordinates";
 
 export class StarData {
 

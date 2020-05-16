@@ -1,8 +1,8 @@
-import {GregorianDateTime} from "./formulas/GregorianDateTime";
-import {DMSCoordinates} from "./models/DMSCoordinates";
-import {Utils} from "./formulas/Utils";
-import {EquatorialCoordinates} from "./models/EquatorialCoordinates";
-import {SiderealTime} from "./formulas/SiderealTime";
+import {GregorianDateTimeService} from "./formulas/GregorianDateTime";
+import {DMSCoordinates} from "./models/coordinates/DMSCoordinates";
+import {Utils} from "./services/Utils";
+import {EquatorialCoordinates} from "./models/coordinates/EquatorialCoordinates";
+import {SiderealTime} from "./services/SiderealTime";
 import {CoordinatesConverterService} from "./services/CoordinatesConverter.service";
 
 export module Algorithm {
@@ -31,14 +31,14 @@ export module Algorithm {
 
     /**
      * Calculate Horizontal Coordinates.
-     * @param dateTime : GregorianDateTime - Time
+     * @param dateTime : GregorianDateTimeService - Time
      * @param observer_latitude
      * @param observer_longitude
      * @param declination
      * @param rightAscension
      */
     export function calculateHorizontalCoordinates(
-        dateTime : GregorianDateTime,
+        dateTime : GregorianDateTimeService,
         observer_latitude: DMSCoordinates,
         observer_longitude : DMSCoordinates,
         declination: number,

@@ -4,10 +4,10 @@ import {Algorithm} from "../../../../../typescript/Algorithm";
 import starsData from "./../../../../../data/stars_data.json";
 // @ts-ignore
 import constellationData from "./../../../../../data/constellations_data.json";
-import {StarData} from "../../../../../typescript/models/StarData";
-import {ConstellationData} from "../../../../../typescript/models/ConstellationData";
-import {GregorianDateTime} from "../../../../../typescript/formulas/GregorianDateTime";
-import {DMSCoordinates} from "../../../../../typescript/models/DMSCoordinates";
+import {StarData} from "../../../../../typescript/models/data/StarData";
+import {ConstellationData} from "../../../../../typescript/models/data/ConstellationData";
+import {GregorianDateTimeService} from "../../../../../typescript/formulas/GregorianDateTime";
+import {DMSCoordinates} from "../../../../../typescript/models/coordinates/DMSCoordinates";
 
 @Component({
   selector: 'app-adaendra-sky-viewer',
@@ -28,7 +28,7 @@ export class AppAdaendraSkyViewerComponent implements OnInit {
   // PRIVATE METHODS
   private calculateStarsLocation() {
     // TODO / A déplacer dans un store
-    var dateTime = GregorianDateTime.now();
+    var dateTime = GregorianDateTimeService.now();
     var observer_latitude = new DMSCoordinates(38, 55, 17);
     var observer_longitude = new DMSCoordinates(-77, 3, 56);
 
