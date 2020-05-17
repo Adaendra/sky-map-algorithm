@@ -38,9 +38,7 @@ export class AppAdaendraSkyViewerComponent implements AfterViewInit {
   // PRIVATE METHODS
   private calculateStarsLocation() {
     // TODO : A déplacer dans un store
-    var dateTime = new GregorianDateTime(
-      2020, 5, 16, 12, 0, 0, 0
-    );
+    var dateTime = GregorianDateTimeService.now();
     var observer_latitude = new DMSCoordinates(38, 55, 17);
     var observer_longitude = new DMSCoordinates(-77, 3, 56);
 
