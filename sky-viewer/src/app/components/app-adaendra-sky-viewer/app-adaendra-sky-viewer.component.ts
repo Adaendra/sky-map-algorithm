@@ -8,6 +8,7 @@ import {StarData} from "../../../../../typescript/models/data/StarData";
 import {ConstellationData} from "../../../../../typescript/models/data/ConstellationData";
 import {DMSCoordinates} from "../../../../../typescript/models/coordinates/DMSCoordinates";
 import {GregorianDateTime} from "../../../../../typescript/models/time/GregorianDateTime";
+import {GregorianDateTimeService} from "../../../../../typescript/services/GregorianDateTime.service";
 
 @Component({
   selector: 'app-adaendra-sky-viewer',
