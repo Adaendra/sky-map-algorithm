@@ -1,43 +1,60 @@
 import {HourCoordinates} from "../models/coordinates/HourCoordinates";
 import {EquatorialCoordinates} from "../models/coordinates/EquatorialCoordinates";
-import {UtilsService} from "./Utils.service";
 import {HorizontalCoordinates} from "../models/coordinates/HorizontalCoordinates";
 
 export class CoordinatesConverterService {
 
     // STATIC METHODS
     // -- EQUATORIAL COORDINATES -- //
+    /**
+     * Method to convert Equatorial Coordinates to Hour Coordinates.
+     * @param equatorialCoordinates : EquatorialCoordinates
+     * @param observerTimeSidereal : number
+     * @return HourCoordinates
+     */
     public static convert_equatorialCoordinates_to_hourCoordinates(
-        _equatorialCoordinates: EquatorialCoordinates,
-        _observerTimeSidereal: number
+        equatorialCoordinates: EquatorialCoordinates,
+        observerTimeSidereal: number
     ) {
         return new HourCoordinates(
-            (_observerTimeSidereal - _equatorialCoordinates.rightAscension),
-            _equatorialCoordinates.declination
+            (observerTimeSidereal - equatorialCoordinates.rightAscension),
+            equatorialCoordinates.declination
         );
     }
 
     // -- HOUR COORDINATES -- //
+    /**
+     * Convert Hour Coordinates to Equatorial Coordinates
+     * @param hourCoordinates : HourCoordinates
+     * @param observerTimeSidereal : number
+     * @return EquatorialCoordinates
+     */
     public static convert_hourCoordinates_to_equatorialCoordinates (
-        _hourCoordinates : HourCoordinates,
-        _observerTimeSidereal : number
+        hourCoordinates : HourCoordinates,
+        observerTimeSidereal : number
     ): EquatorialCoordinates  {
         return new EquatorialCoordinates(
-            (_observerTimeSidereal - _hourCoordinates.hourAngle),
-            _hourCoordinates.declination
+            (observerTimeSidereal - hourCoordinates.hourAngle),
+            hourCoordinates.declination
         );
     }
 
+    /**
+     * Convert Hout Coordinates to Horizontal Coordinates.
+     * @param hourCoordinates : HourCoordinates
+     * @param observerLatitude : number
+     * @return HorizontalCoordinates
+     */
     public static convert_hourCoordinates_to_horizontalCoordinates (
-        _hourCoordinates : HourCoordinates,
-        _observerLatitude : number
+        hourCoordinates : HourCoordinates,
+        observerLatitude : number
     ): HorizontalCoordinates {
-        var declinaisonRad = _hourCoordinates.declination;
-        var hourAngleRad = _hourCoordinates.hourAngle; //UtilsService.revolution(UtilsService.convertDecimalHourToDegrees(_hourCoordinates.hourAngle)) * Math.PI / 180;
+        var declinaisonRad = hourCoordinates.declination;
+        var hourAngleRad = hourCoordinates.hourAngle;
 
 
         // Formula 13.5 -> p.93
-        var intD = ((Math.cos(hourAngleRad) * Math.sin(_observerLatitude)) - (Math.tan(declinaisonRad) * Math.cos(_observerLatitude)));
+        var intD = ((Math.cos(hourAngleRad) * Math.sin(observerLatitude)) - (Math.tan(declinaisonRad) * Math.cos(observerLatitude)));
 
         var azimuth = Math.atan( Math.sin(hourAngleRad) / intD );
         if (intD < 0) {
@@ -46,7 +63,7 @@ export class CoordinatesConverterService {
 
         // Formula 13.6 -> p.93
         var altitude = Math.asin(
-            (Math.sin(_observerLatitude) * Math.sin(declinaisonRad)) + (Math.cos(_observerLatitude) * Math.cos(declinaisonRad) * Math.cos(hourAngleRad))
+            (Math.sin(observerLatitude) * Math.sin(declinaisonRad)) + (Math.cos(observerLatitude) * Math.cos(declinaisonRad) * Math.cos(hourAngleRad))
         );
 
 

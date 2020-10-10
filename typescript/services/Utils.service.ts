@@ -3,80 +3,94 @@ export class UtilsService {
     // PUBLIC METHODS
     /**
      * If _angle is not between 0 and 360°, add or substract 360 util value is include between.
-     * @param _angle: number.
+     * @param angle: number.
      * @return number - Converted angle.
      */
-    public static revolution(_angle) {
-        if (_angle < 0) {
-            _angle = _angle + 360;
-        } else if (_angle >= 360) {
-            _angle = _angle - 360;
+    public static revolution(angle : number) : number {
+        if (angle < 0) {
+            angle = angle + 360;
+        } else if (angle >= 360) {
+            angle = angle - 360;
         }
 
-        if(_angle < 0 || _angle >= 360) {
-            return this.revolution(_angle);
+        if(angle < 0 || angle >= 360) {
+            return this.revolution(angle);
         } else {
-            return _angle;
+            return angle;
         }
     }
 
     // ----- Time <-> Decimal -----
     /**
      * Convert time to decimal hour.
-     * @param _h : number - Hours.
-     * @param _m : number - Minutes.
-     * @param _s : number - Seconds.
+     * @param h : number - Hours.
+     * @param m : number - Minutes.
+     * @param s : number - Seconds.
+     * @return number - Decimal Hour.
      */
-    public static convertTimeToDecimal(_h : number, _m : number, _s : number) {
-        return _h + _m / 60 + _s / 3600;
+    public static convertTimeToDecimal(h : number, m : number, s : number) : number {
+        return h + m / 60 + s / 3600;
     }
 
     // ----- DMS <-> Radians
-    public static convertDMSToDegrees(_d, _m, _s) {
-        if (_d < 0) {
-            return _d - _m / 60 - _s / 3600;
+    /**
+     * Convert DMS to Decimal Degrees.
+     * @param d : number - Degrees
+     * @param m : number - Minutes
+     * @param s : number - Second
+     * @return number - Decimal Degrees
+     */
+    public static convertDMSToDegrees(d: number, m: number, s: number) : number {
+        if (d < 0) {
+            return d - m / 60 - s / 3600;
         } else {
-            return _d + _m / 60 + _s / 3600;
+            return d + m / 60 + s / 3600;
         }
     }
 
     // ----- Degrees <-> Decimal Hour -----
     /**
      * 1 h <=> 15°
-     * @param _d : number - Number of degrees.
+     * @param d : number - Number of degrees.
      * @return number - Decimal hour.
      */
-    public static convertDegreesToDecimalHour(_d): number {
-        return _d / 15;
+    public static convertDegreesToDecimalHour(d : number): number {
+        return d / 15;
     }
 
     /**
      * 1h <=> 15°
-     * @param _h : number - Number of hours.
+     * @param h : number - Number of hours.
      * @return number - Degrees.
      */
-    public static convertDecimalHourToDegrees(_h) {
-        return _h * 15;
+    public static convertDecimalHourToDegrees(h : number) : number {
+        return h * 15;
     }
 
     // ----- Hour angle -----
-    // public static define_hourAngle(_localSiderealTime: number, _rightAscension: number) {
-    //     return Utils.convertDegreesToDecimalHour(_localSiderealTime) - Utils.convertDegreesToDecimalHour(_rightAscension);
-    // }
-
-    public static define_hourAngle(_greenwichSiderealTime: number, _observerLongitude: number, _rightAscension: number) {
-        return UtilsService.convertDegreesToDecimalHour(_greenwichSiderealTime)
-            + UtilsService.convertDegreesToDecimalHour(_observerLongitude)
-            - _rightAscension;
+    /**
+     * Calculate Hour Angle from :
+     * @param greenwichSiderealTime : number - Greenwich Sidereal Time.
+     * @param observerLongitude : number - Observer Longitude
+     * @param rightAscension : number - Right Ascension.
+     * @return number - Hour Angle
+     */
+    public static define_hourAngle(greenwichSiderealTime: number, observerLongitude: number, rightAscension: number) : number {
+        return UtilsService.convertDegreesToDecimalHour(greenwichSiderealTime)
+            + UtilsService.convertDegreesToDecimalHour(observerLongitude)
+            - rightAscension;
     }
 
     // ----- Right Ascension -----
-    // public static define_rightAscension(_localSiderealTime: number, _hourAngle: number) {
-    //     return _localSiderealTime - _hourAngle;
-    // }
-
-    public static define_rightAscension(_greenwichSiderealTime: number, _observerLongitude: number, _hourAngle: number) {
-        return _greenwichSiderealTime + _observerLongitude - _hourAngle;
+    /**
+     * Calculate Right Ascension from :
+     * @param greenwichSiderealTime : number - Greenwich Sidereal Time
+     * @param observerLongitude : number - Observer Longitude
+     * @param hourAngle : number - Hour Angle
+     * @return number - Right Ascension.
+     */
+    public static define_rightAscension(greenwichSiderealTime: number, observerLongitude: number, hourAngle: number) : number {
+        return greenwichSiderealTime + observerLongitude - hourAngle;
     }
 
 }

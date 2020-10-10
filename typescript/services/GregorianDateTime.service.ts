@@ -8,6 +8,11 @@ import {JulianDay} from "../models/time/JulianDay";
 export class GregorianDateTimeService {
 
     // PUBLIC METHODS
+    /**
+     * Convert a Gregorian Date Time to Julian Day.
+     * @param gregorianDateTime : GregorianDateTime
+     * @return JulianDay
+     */
     public static convertToJulianDay(gregorianDateTime: GregorianDateTime): JulianDay {
         var jd_year = this.define_year(gregorianDateTime.year, gregorianDateTime.month);
         var jd_month = this.define_month(gregorianDateTime.month);
@@ -17,6 +22,10 @@ export class GregorianDateTimeService {
         return new JulianDay(this.calculate_JulianDay(jd_year, jd_month, jd_B, jd_day));
     }
 
+    /**
+     * Return the current Gregorian Date Time.
+     * @return GregorianDateTime
+     */
     public static now(): GregorianDateTime {
         var d = new Date();
         return new GregorianDateTime(
@@ -31,43 +40,83 @@ export class GregorianDateTimeService {
     }
 
     // PRIVATE METHODS
-    private static define_year(_year, _month) {
-        if (_month === 1 || _month === 2) {
-            return _year - 1;
+    /**
+     * Define year following the formula to calculate the JulianDay.
+     * Chapiter 7 -> p.60-61
+     * @param year : number
+     * @param month : number
+     * @return number
+     */
+    private static define_year(year : number, month : number) {
+        if (month === 1 || month === 2) {
+            return year - 1;
         } else {
-            return _year;
+            return year;
         }
     }
 
-    private static define_month(_month) {
-        if (_month === 1 || _month === 2) {
-            return _month + 12;
+    /**
+     * Define month following the formula to calculate the JulianDay.
+     * Chapiter 7 -> p.60-61
+     * @param month : number
+     * @return number - The Month parameter to calculate JulianDay.
+     */
+    private static define_month(month : number) : number {
+        if (month === 1 || month === 2) {
+            return month + 12;
         } else {
-            return _month;
+            return month;
         }
     }
 
-    private static define_A(_year) {
+    /**
+     * Define the A parameter to calculate JulianDay.
+     * @param _year : number
+     * @return number
+     */
+    private static define_A(_year : number) : number {
         return Math.floor(_year / 100);
     }
 
-    private static define_B(_A, isGregorianCalendar) {
+    /**
+     * Define the B parameter to calculate JulianDay.
+     * @param A : number - The A parameter calculate with the method "define_A"
+     * @param isGregorianCalendar : boolean
+     * @return number
+     */
+    private static define_B(A : number, isGregorianCalendar : boolean) : number {
         if (isGregorianCalendar) {
-            return 2 - _A + Math.floor(_A / 4);
+            return 2 - A + Math.floor(A / 4);
         } else {
             return 0;
         }
     }
 
-    private static define_decimalDay(_day, _hours, _minutes, _seconds) {
-        var minutes_decimal = _minutes + (_seconds / 60);
-        var hours_decimal = _hours + (minutes_decimal / 60);
-        return _day + (hours_decimal / 24)
+    /**
+     * Calculate the decimal Day to calculate the JulianDay.
+     * @param day : number
+     * @param hours : number
+     * @param minutes : number
+     * @param seconds : number
+     * @return number - The day value in decimal.
+     */
+    private static define_decimalDay(day : number, hours : number, minutes : number, seconds : number) : number {
+        var minutes_decimal = minutes + (seconds / 60);
+        var hoursdecimal = hours + (minutes_decimal / 60);
+        return day + (hoursdecimal / 24)
     }
 
-    private static calculate_JulianDay(_year, _month, _B, _decimalDay) {
-        return Math.floor(365.25 * (_year + 4716))
-            + Math.floor(30.6001 * (_month + 1))
-            + _decimalDay + _B - 1524.5;
+    /**
+     * Calculate the JulianDay following the formula.
+     * @param year : number
+     * @param month : number
+     * @param B : number - The B parameter calculate with the method "define_B"
+     * @param decimalDay : number
+     * @return number - The JulianDay value.
+     */
+    private static calculate_JulianDay(year : number, month : number, B : number, decimalDay : number) : number {
+        return Math.floor(365.25 * (year + 4716))
+            + Math.floor(30.6001 * (month + 1))
+            + decimalDay + B - 1524.5;
     }
 }

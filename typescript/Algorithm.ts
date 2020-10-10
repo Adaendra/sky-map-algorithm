@@ -5,38 +5,40 @@ import {EquatorialCoordinates} from "./models/coordinates/EquatorialCoordinates"
 import {SiderealTimeService} from "./services/SiderealTime.service";
 import {CoordinatesConverterService} from "./services/CoordinatesConverter.service";
 import {GregorianDateTime} from "./models/time/GregorianDateTime";
+import {HorizontalCoordinates} from "./models/coordinates/HorizontalCoordinates";
 
 export module Algorithm {
 
     /**
      * Convert DMS value to decimal degree value.
-     * @param _d: number - Degrees.
-     * @param _m: number - Minutes.
-     * @param _s: number - Seconds.
+     * @param d: number - Degrees.
+     * @param m: number - Minutes.
+     * @param s: number - Seconds.
      * @return number - Decimal degree value.
      */
-    export function convertDMSToDegrees(_d, _m, _s): number {
-        return UtilsService.convertDMSToDegrees(_d, _m, _s);
+    export function convertDMSToDegrees(d, m, s): number {
+        return UtilsService.convertDMSToDegrees(d, m, s);
     }
 
     /**
      * Convert time to decimal time.
-     * @param _h: number - Hours.
-     * @param _m: number - Minutes.
-     * @param _s: number - Seconds.
+     * @param h: number - Hours.
+     * @param m: number - Minutes.
+     * @param s: number - Seconds.
      * @return number - Decimal time.
      */
-    export function convertTimeToDecimal(_h : number, _m : number, _s : number): number {
-        return UtilsService.convertTimeToDecimal(_h, _m, _s);
+    export function convertTimeToDecimal(h : number, m : number, s : number): number {
+        return UtilsService.convertTimeToDecimal(h, m, s);
     }
 
     /**
-     * Calculate Horizontal Coordinates.
+     * Calculate Horizontal Coordinates from GregorianDateTime.
      * @param dateTime : GregorianDateTimeService - Time
-     * @param observer_latitude
-     * @param observer_longitude
-     * @param declination
-     * @param rightAscension
+     * @param observer_latitude : DMSCoordinates
+     * @param observer_longitude : DMSCoordinates
+     * @param declination : number
+     * @param rightAscension : number
+     * @return HorizontalCoordinates
      */
     export function calculateHorizontalCoordinates(
         dateTime : GregorianDateTime,
@@ -44,7 +46,7 @@ export module Algorithm {
         observer_longitude : DMSCoordinates,
         declination: number,
         rightAscension: number
-    ) {
+    ) : HorizontalCoordinates {
         var equatorialCoordinates = new EquatorialCoordinates(rightAscension, declination);
 
         var siderealTimeGreenwich = UtilsService.revolution(
