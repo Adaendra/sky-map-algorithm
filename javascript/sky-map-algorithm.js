@@ -2,6 +2,12 @@
 // ----- Gregorian Day -> Julian Day ----- //
 // --------------------------------------- //
 // -- Chapitre 7 -> p.60-61
+/**
+ * Define the year parameter for the JulianDay formula.
+ * @param _year : number
+ * @param _month : number
+ * @return number
+ */
 function define_year(_year, _month) {
     if (_month === 1 || _month === 2) {
         return _year - 1;
@@ -10,6 +16,11 @@ function define_year(_year, _month) {
     }
 }
 
+/**
+ * Define the month parameter for the JulianDay formula.
+ * @param _month : number
+ * @return number
+ */
 function define_month(_month) {
     if (_month === 1 || _month === 2) {
         return _month + 12;
@@ -18,10 +29,21 @@ function define_month(_month) {
     }
 }
 
+/**
+ * Calculate the A parameter for the JulianDay formula.
+ * @param _year : number
+ * @return number
+ */
 function define_A(_year) {
     return Math.floor(_year / 100);
 }
 
+/**
+ * Calculate the B parameter for the JulianDay formula.
+ * @param _A : number - The A parameter calculate with the method "define_A".
+ * @param isGregorianCalendar : boolean
+ * @return number
+ */
 function define_B(_A, isGregorianCalendar) {
     if (isGregorianCalendar) {
         return 2 - _A + Math.floor(_A / 4);
@@ -30,12 +52,31 @@ function define_B(_A, isGregorianCalendar) {
     }
 }
 
+/**
+ * Calculate Decimal Day.
+ * @param _day : number
+ * @param _hours : number
+ * @param _minutes : number
+ * @param _seconds : number
+ * @return number - Decimal Day
+ */
 function define_decimalDay(_day, _hours, _minutes, _seconds) {
     var minutes_decimal = _minutes + (_seconds / 60);
     var hours_decimal = _hours + (minutes_decimal / 60);
     return _day + (hours_decimal / 24);
 }
 
+/**
+ * Calculate JulianDay value.
+ * @param _year : number - Year
+ * @param _month : number - Month
+ * @param _day : number - Day
+ * @param _hour : number - Hour
+ * @param _minute : number - Minutes
+ * @param _second : number - Seconds
+ * @param _isGregorianCalendar : boolean
+ * @return {number} - JulianDay value.
+ */
 function define_JulianDay(_year, _month, _day, _hour, _minute, _second, _isGregorianCalendar) {
     var year = define_year(_year, _month);
     var month = define_month(_month);
@@ -120,11 +161,25 @@ function revolution(_angle) {
 
 
 // ----- Time <-> Decimal -----
+/**
+ * Convert Time to Decimal Hour.
+ * @param _h : number - Hour
+ * @param _m : number - Minutes
+ * @param _s : number - Seconds
+ * @return number - Decimal Hour
+ */
 function convertTimeToDecimal(_h, _m, _s) {
     return _h + _m / 60 + _s / 3600;
 }
 
 // ----- DMS <-> Radians
+/**
+ * Convert DMS to Decimal Degrees
+ * @param _d : number
+ * @param _m : number
+ * @param _s : number
+ * @return {number} - Decimal Degrees.
+ */
 function convertDMSToDegrees(_d, _m, _s) {
     if (_d < 0) {
         return _d - _m / 60 - _s / 3600;
@@ -133,6 +188,11 @@ function convertDMSToDegrees(_d, _m, _s) {
     }
 }
 
+/**
+ * Convert Decimal Degrees to DMS.
+ * @param _coordinateDegrees : number - Decimal Degrees.
+ * @return {{s: number, d: number, m: number}} - DMS Coordinate.
+ */
 function convertDegreesToDMS(_coordinateDegrees) {
     var d_decimal = _coordinateDegrees;
     var d = Math.floor(d_decimal);
@@ -146,10 +206,20 @@ function convertDegreesToDMS(_coordinateDegrees) {
 }
 
 // ----- Degrees <-> Decimal Hour -----
+/**
+ * Convert degrees to Decimal Hour
+ * @param _d : number - Degrees
+ * @return {number} - Decimal Hour
+ */
 function convertDegreesToDecimalHour(_d) {
     return _d / 15; // We devide by 15 because 1h = 15°
 }
 
+/**
+ * Convert Decimal Hour to Degrees.
+ * @param _d : number - Decimal Hour.
+ * @return {number} - Degrees
+ */
 function convertDecimalHourToDegrees(_d) {
     return _d * 15; // We multiply by 15 because 1h = 15°
 }
@@ -160,28 +230,59 @@ function convertDecimalHourToDegrees(_d) {
 // ----------------------- //
 
 // ----- Hour angle ----- //
+/**
+ * Define Hour Angle from :
+ * @param _localSiderealTime : number
+ * @param _rightAscension : number
+ * @return {number}
+ */
 function define_hourAngle(_localSiderealTime, _rightAscension) {
     return _localSiderealTime - _rightAscension;
 }
 
+/**
+ * Define Hour Angle from :
+ * @param _greenwichSiderealTime : number
+ * @param _observerLongitude : number
+ * @param _rightAscension : number
+ * @return {number}
+ */
 function define_hourAngle(_greenwichSiderealTime, _observerLongitude, _rightAscension) {
     return _greenwichSiderealTime + _observerLongitude - _rightAscension;
 }
 
 
 // ----- Right Ascension ----- //
-
+/**
+ * Define Right Ascension from :
+ * @param _localSiderealTime : number
+ * @param _hourAngle : number
+ * @return {number}
+ */
 function define_rightAscension(_localSiderealTime, _hourAngle) {
     return _localSiderealTime - _hourAngle;
 }
 
+/**
+ * Define Right Ascension from :
+ * @param _greenwichSiderealTime : number
+ * @param _observerLongitude : number
+ * @param _hourAngle : number
+ * @return {number}
+ */
 function define_rightAscension(_greenwichSiderealTime, _observerLongitude, _hourAngle) {
     return _greenwichSiderealTime + _observerLongitude - _hourAngle;
 }
 
 
 // ----- Equatorial Coordinates <-> Hour Coordinates ----- //
-
+/**
+ * Convert Equatorial Coordinates to Hour Coordinates.
+ * @param _declination : number
+ * @param _observerSiderealTime : number
+ * @param _rightAscension : number
+ * @return {{declination: *, hourAngle: *}} : Hour Coordinates
+ */
 function convert_equatorialCoordinates_to_hourCoordinates(_declination, _observerSiderealTime, _rightAscension) {
     return {
         declination : _declination,
@@ -189,6 +290,13 @@ function convert_equatorialCoordinates_to_hourCoordinates(_declination, _observe
     }
 }
 
+/**
+ * Convert Hour Coordinates to Equatorial Coordinates.
+ * @param _declination : number - Declination
+ * @param _observerSiderealTime : number - Observer's sidereal time.
+ * @param _hourAngle : number - Hour Angle.
+ * @return {{declination: number, rightAscension: number}} - Equatorial Coordinates
+ */
 function convert_hourCoordinates_to_equatorialCoordinates(_declination, _observerSiderealTime, _hourAngle) {
     return {
         declination: _declination,
@@ -197,6 +305,13 @@ function convert_hourCoordinates_to_equatorialCoordinates(_declination, _observe
 }
 
 // ----- Equatorial coordinates <-> Horizontal coordinates ----- //
+/**
+ * Convert Equatorial Coordinates to Horizontal Coordinates
+ * @param _observerLatitude : number - Observer's latitude
+ * @param _declination : number - Declination
+ * @param _hourAngle : number - Hour Angle
+ * @return {{altitude: number, azimuth: number}} - Horizontal Coordinates
+ */
 function convert_equatorialCoordinates_to_horizontalCoordinates(_observerLatitude, _declination, _hourAngle) {
     // Formula 13.5 -> p 93
     var azimuth = Math.atan(
@@ -223,12 +338,12 @@ function convert_equatorialCoordinates_to_horizontalCoordinates(_observerLatitud
 // --------------------- //
 /**
  * Algorithm to calculate a celestial object's location for an observer at a moment.
- * @param year : number
- * @param month : number
- * @param day : number
- * @param hour : number
- * @param minutes : number
- * @param seconds : number
+ * @param year : number - Year of the moment.
+ * @param month : number - Month of the moment.
+ * @param day : number - Day of the moment.
+ * @param hour : number - Hour of the moment.
+ * @param minutes : number - Minute of the moment.
+ * @param seconds : number - Seconds of the moment.
  * @param observer_latitude : number - Latitude in degrees. ex: 46.204391
  * @param observer_longitude : number - Longitude in degrees. ex: 6.143158
  * @param celestialObject_declination : number - Declination in degrees. ex: 6.143158
@@ -256,6 +371,8 @@ function starLocationAlgorithm(year, month, day, hour, minutes, seconds,
     );
 }
 
+
+// ------------------------------------------------------------------------------------------------------------------ //
 // -- TEST
 var result = this.starLocationAlgorithm(1987, 4, 10, 19, 21, 0,
     convertDMSToDegrees(38, 55, 17), convertDMSToDegrees(-77, 3, 56),

@@ -1,6 +1,7 @@
 import {UtilsService} from "../../services/Utils.service";
 
 export class DMSCoordinates {
+
     // ATTRIBUTES
     public degrees: number;
     public minutes: number;

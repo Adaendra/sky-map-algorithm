@@ -8,6 +8,11 @@ import {GregorianDateTime} from "../models/time/GregorianDateTime";
 export class JulianDayService {
 
     // PUBLIC METHODS
+    /**
+     * Convert a JulianDay to GregorianDateTime.
+     * @param julianDay : JulianDay
+     * @return GregorianDateTime
+     */
     public static convertToGregorianDay(julianDay: JulianDay): GregorianDateTime {
         var J = julianDay.value + 0.5;
         var Z = Math.floor(J);
@@ -38,12 +43,17 @@ export class JulianDayService {
 
 
     // PRIVATE METHODS
-    private static define_A(_Z) {
-        if (_Z < 2299161) {
-            return _Z;
+    /**
+     * Calculate the A parameter to convert JulianDate to GregorianDateTime.
+     * @param Z : number
+     * @return number
+     */
+    private static define_A(Z : number) {
+        if (Z < 2299161) {
+            return Z;
         } else {
-            var a = Math.floor((_Z - 1867216.25) / 36534.25);
-            return _Z + 1 + a - Math.floor(a / 4);
+            var a = Math.floor((Z - 1867216.25) / 36534.25);
+            return Z + 1 + a - Math.floor(a / 4);
         }
     }
 
